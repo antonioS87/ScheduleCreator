@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
+
+    <TextView
+    android:id="@+id/pick_start_date_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:text="@string/pick_start_date"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="14sp"
+    android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        />
+
+    <TextView
+        android:id="@+id/picked_start_date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/pick_start_date_button"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/colorAccent"
+        android:background="@color/colorPrimary"
+        android:layout_marginLeft="8dp"
+        android:textSize="16dp"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/pick_end_date_button"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/picked_start_date_tv"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:fontFamily="sans-serif-thin"
+        android:text="@string/pick_end_date"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"/>
+
+    <TextView
+        android:id="@+id/picked_end_date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8sp"
+        android:layout_below="@id/picked_start_date_tv"
+        android:layout_toRightOf="@id/pick_start_date_button"
+        android:background="@color/colorPrimary"
+        android:ems="10"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/colorAccent"
+        android:layout_marginLeft="8dp"
+        android:textSize="16dp" />
+</RelativeLayout>
