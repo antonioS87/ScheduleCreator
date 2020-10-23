@@ -56,6 +56,7 @@ public class DatesPickingFragment extends Fragment {
 
         //Set OnClickListener and OnFocusChangeListener to capture all clicks
         mPickStartDateTv.setOnClickListener( new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 //                MutableLiveData<Date> startDate = new MutableLiveData<>();
