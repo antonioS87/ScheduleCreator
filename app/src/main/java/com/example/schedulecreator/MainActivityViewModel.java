@@ -3,6 +3,9 @@ package com.example.schedulecreator;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.schedulecreator.Models.Worker;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -11,6 +14,9 @@ public class MainActivityViewModel extends ViewModel {
     //Start and end date of the schedule
     private MutableLiveData<Date> startDate = new MutableLiveData<>();
     private MutableLiveData<Date> endDate = new MutableLiveData<>();
+
+    //List of personnel
+    private MutableLiveData<Worker> personnelList = new MutableLiveData<>();
 
     public MainActivityViewModel(){
         super();

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import com.example.schedulecreator.fragments.DatesPickingFragment;
 
@@ -15,7 +16,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ConstraintLayout mMainContainer;
+    private LinearLayout mMainContainer;
     private MainActivityViewModel mViewModel;
 
     @Override
@@ -29,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         //DatesPickingFragment receives MutableLiveData<Date> objects from ViewModel and sets
         //their value. That way the ViewModel is notified of every date change
-        DatesPickingFragment datesFragment = new DatesPickingFragment( mViewModel.getStartDate(), mViewModel.getEndDate() );
+        DatesPickingFragment datesFragment = DatesPickingFragment.newInstance( mViewModel.getStartDate(), mViewModel.getEndDate() );
+        DatesPickingFragment datesFragment2 = DatesPickingFragment.newInstance( mViewModel.getStartDate(), mViewModel.getEndDate() );
 
         Calendar cal = Calendar.getInstance(); // that is NOW for the timezone configured on the computer.
         cal.set(Calendar.HOUR, 0);
@@ -39,7 +41,10 @@ public class MainActivity extends AppCompatActivity {
         cal.set( Calendar.MONTH, 1);
         Date date = cal.getTime();
 
+        getSupportFragmentManager().beginTransaction().
+                add( R.id.main_container, datesFragment, "dates_fragment").
+                add(R.id.main_container, datesFragment2, "dates_fragment2").
+                commitNow();
 
-        getSupportFragmentManager().beginTransaction().replace( R.id.main_container, datesFragment, null).commitNow();
     }
 }

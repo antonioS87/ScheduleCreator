@@ -20,8 +20,10 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.schedulecreator.DateUtils.DateFormater;
+import com.example.schedulecreator.MainActivityViewModel;
 import com.example.schedulecreator.R;
 import com.example.schedulecreator.controllers.StarEndDatePickersController;
 import com.example.schedulecreator.dialogs.DatePickerDialogFragment;
@@ -39,10 +41,21 @@ public class DatesPickingFragment extends Fragment {
     private MutableLiveData<Date> mEndDate;
     private StarEndDatePickersController mdatePickersController;
 
-    public DatesPickingFragment(MutableLiveData<Date> startDate, MutableLiveData<Date> endDate) {
+    public static DatesPickingFragment newInstance(MutableLiveData<Date> startDate, MutableLiveData<Date> endDate) {
+        DatesPickingFragment datesPickingFragment = new DatesPickingFragment();
+        datesPickingFragment.setArguments( startDate, endDate );
+        return datesPickingFragment;
+    }
+
+    private void setArguments(MutableLiveData<Date> startDate, MutableLiveData<Date> endDate) {
         this.mStartDate = startDate;
         this.mEndDate = endDate;
     }
+
+//    public DatesPickingFragment(MutableLiveData<Date> startDate, MutableLiveData<Date> endDate) {
+//        this.mStartDate = startDate;
+//        this.mEndDate = endDate;
+//    }
 
 
     @Nullable
