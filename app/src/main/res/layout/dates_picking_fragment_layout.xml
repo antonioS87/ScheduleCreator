@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
     >
 
     <TextView
-    android:id="@+id/pick_start_date_button"
+    android:id="@+id/pick_start_date_text"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentStart="true"
+        android:textColor="@color/colorPrimary"
     android:text="@string/pick_start_date"
         android:fontFamily="sans-serif-thin"
-        android:textSize="14sp"
+        android:textSize="16sp"
     android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"
         />
@@ -22,24 +25,32 @@
         android:id="@+id/picked_start_date_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/pick_start_date_button"
+        android:layout_toEndOf="@+id/pick_start_date_text"
         android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif-thin"
-        android:textColor="@color/colorAccent"
-        android:background="@color/colorPrimary"
+        style="@style/EditTextStyle"
         android:layout_marginLeft="8dp"
-        android:textSize="16dp"
-        android:ems="10" />
+         />
+    <View
+        android:id="@+id/edit_text_initial_separator"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_below="@id/picked_start_date_tv"
+        android:background="@drawable/edit_text_bottom_line"
+        android:layout_toEndOf="@+id/pick_start_date_text"
+        android:layout_marginLeft="8dp"
+        android:layout_alignEnd="@id/picked_start_date_tv"
+        />
 
     <TextView
-        android:id="@+id/pick_end_date_button"
+        android:id="@+id/pick_end_date_text"
         android:layout_width="wrap_content"
         android:layout_below="@id/picked_start_date_tv"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:fontFamily="sans-serif-thin"
         android:text="@string/pick_end_date"
-        android:textSize="14sp"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimary"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"/>
 
@@ -49,11 +60,31 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8sp"
         android:layout_below="@id/picked_start_date_tv"
-        android:layout_toRightOf="@id/pick_start_date_button"
-        android:background="@color/colorPrimary"
-        android:ems="10"
-        android:fontFamily="sans-serif-thin"
-        android:textColor="@color/colorAccent"
+        android:layout_toRightOf="@id/pick_end_date_text"
+        android:layout_alignEnd="@id/picked_start_date_tv"
+        style="@style/EditTextStyle"
+        android:layout_marginLeft="8dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.01dp"
+        android:layout_below="@id/picked_end_date_tv"
+        android:layout_alignEnd="@id/edit_text_initial_separator"
+        android:background="@drawable/edit_text_bottom_line"
+        android:layout_toEndOf="@+id/pick_start_date_text"
         android:layout_marginLeft="8dp"
-        android:textSize="16dp" />
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/pick_end_date_text"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorAccent"/>
+
+
 </RelativeLayout>

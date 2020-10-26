@@ -3,6 +3,7 @@ package com.example.schedulecreator;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,17 +16,20 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     private ConstraintLayout mMainContainer;
+    private MainActivityViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         mMainContainer = findViewById( R.id.main_container );
+
 
         //DatesPickingFragment receives MutableLiveData<Date> objects from ViewModel and sets
         //their value. That way the ViewModel is notified of every date change
-        DatesPickingFragment datesFragment = new DatesPickingFragment(new MutableLiveData<Date>(), new MutableLiveData<Date>());
+        DatesPickingFragment datesFragment = new DatesPickingFragment( mViewModel.getStartDate(), mViewModel.getEndDate() );
 
         Calendar cal = Calendar.getInstance(); // that is NOW for the timezone configured on the computer.
         cal.set(Calendar.HOUR, 0);
