@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardUseCompatPadding="true"
+    android:elevation="5dp"
+    android:backgroundTint="@color/colorPrimary">
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/worker_surname_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Pliško"
+            style="@style/workerListTextView"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"/>
+        <TextView
+            android:id="@+id/worker_name_tv"
+            android:layout_width="wrap_content"
+            android:text="Kristina"
+            style="@style/workerListTextView"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_below="@id/worker_surname_tv"
+            android:layout_height="wrap_content"
+           />
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

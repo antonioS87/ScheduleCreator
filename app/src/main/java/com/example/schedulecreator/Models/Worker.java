@@ -1,5 +1,7 @@
 package com.example.schedulecreator.Models;
 
+import androidx.lifecycle.MutableLiveData;
+
 import java.util.ArrayList;
 
 public class Worker {
@@ -12,10 +14,12 @@ public class Worker {
     private ArrayList<Day> weekdays = new ArrayList<>();
     private Boolean hadShiftTwoDaysAgo = false;
     private Boolean hadShiftThisWeek = false;
+    private MutableLiveData<Boolean> selected = new MutableLiveData<>();
 
-    public Worker( String name, String id ){
+    public Worker( String name, String id, Boolean selected ){
         this.name = name;
         this.id = id;
+        this.selected.setValue( selected );
     }
 
     public void addDay( Day day ){
