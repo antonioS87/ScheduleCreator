@@ -6,12 +6,17 @@ public class Worker {
 
     private String name;
     private String id;
-    private ArrayList<Day> sundays;
-    private ArrayList<Day> saturdays;
-    private ArrayList<Day> fridays;
-    private ArrayList<Day> weekdays;
+    private ArrayList<Day> sundays = new ArrayList<>();
+    private ArrayList<Day> saturdays = new ArrayList<>();
+    private ArrayList<Day> fridays = new ArrayList<>();
+    private ArrayList<Day> weekdays = new ArrayList<>();
     private Boolean hadShiftTwoDaysAgo = false;
     private Boolean hadShiftThisWeek = false;
+
+    public Worker( String name, String id ){
+        this.name = name;
+        this.id = id;
+    }
 
     public void addDay( Day day ){
 

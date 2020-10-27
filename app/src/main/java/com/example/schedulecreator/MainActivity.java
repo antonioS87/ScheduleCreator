@@ -42,9 +42,8 @@ public class MainActivity extends AppCompatActivity {
         Date date = cal.getTime();
 
         getSupportFragmentManager().beginTransaction().
-                add( R.id.main_container, datesFragment, "dates_fragment").
-                add(R.id.main_container, datesFragment2, "dates_fragment2").
-                commitNow();
+                add( R.id.main_container, datesFragment, "dates_fragment")
+                .commitNow();
 
     }
 }

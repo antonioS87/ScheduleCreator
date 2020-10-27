@@ -72,7 +72,7 @@ public class DatesPickingFragment extends Fragment {
                 new DateFormater(),
                 mStartDate,
                 mEndDate,
-                getActivity());
+                getActivity() );
 
 
         return view;
