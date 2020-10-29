@@ -1,12 +1,15 @@
 package com.example.schedulecreator.Models;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
 
-public class Worker {
+public class Worker implements Comparable {
 
-    private String name;
+    private String firstName;
+    private String lastName;
     private String id;
     private ArrayList<Day> sundays = new ArrayList<>();
     private ArrayList<Day> saturdays = new ArrayList<>();
@@ -15,9 +18,12 @@ public class Worker {
     private Boolean hadShiftTwoDaysAgo = false;
     private Boolean hadShiftThisWeek = false;
     private MutableLiveData<Boolean> selected = new MutableLiveData<>();
+    private int mColor;
 
-    public Worker( String name, String id, Boolean selected ){
-        this.name = name;
+    public Worker( String lastName, String firstName, String id, Boolean selected ){
+        Log.d("test_tag_antonio", " Worker constructor; first name: " + firstName + " last name: " + lastName + " id: " + id + " selected: " + selected);
+        this.lastName = lastName;
+        this.firstName = firstName;
         this.id = id;
         this.selected.setValue( selected );
     }
@@ -26,12 +32,28 @@ public class Worker {
 
     }
 
-    public String getName() {
-        return name;
+    public void setColor(int color ){
+        mColor = color;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public int getColor() {
+        return mColor;
+    }
+
+    public String getLastName(){
+        return this.lastName;
+    }
+
+    public MutableLiveData<Boolean> getSelected() {
+        return selected;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getId() {
@@ -88,5 +110,11 @@ public class Worker {
 
     public void setHadShiftThisWeek(Boolean hadShiftThisWeek) {
         this.hadShiftThisWeek = hadShiftThisWeek;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+
+        return this.lastName.compareTo( ((Worker)o).lastName );
     }
 }

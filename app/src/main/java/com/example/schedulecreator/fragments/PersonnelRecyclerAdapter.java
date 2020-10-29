@@ -1,5 +1,6 @@
 package com.example.schedulecreator.fragments;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,23 +22,29 @@ public class PersonnelRecyclerAdapter extends RecyclerView.Adapter<PersonnelRecy
         this.mWorkerList = workerList;
     }
 
+    public void setWorkerList(ArrayList<Worker> mWorkerList) {
+        this.mWorkerList = mWorkerList;
+    }
+
     @NonNull
     @Override
     public PersonnelRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View viewHolderView = LayoutInflater.from( parent.getContext() ).
-                inflate(R.layout.personnel_list_fragment_layout,parent, false );
+                inflate(R.layout.personnel_list_item,parent, false );
         PersonnelRecyclerViewHolder viewHolder = new PersonnelRecyclerViewHolder( viewHolderView );
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull PersonnelRecyclerViewHolder holder, int position) {
-        holder.initializeHolder( mWorkerList.get( position ));
+        Worker worker = mWorkerList.get( position );
+        Resources resources = holder.itemView.getResources();
+        holder.initializeHolder( worker, resources );
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mWorkerList.size();
     }
 }

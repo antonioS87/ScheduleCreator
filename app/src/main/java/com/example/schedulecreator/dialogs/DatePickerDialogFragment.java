@@ -1,31 +1,24 @@
 package com.example.schedulecreator.dialogs;
-
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.icu.util.Calendar;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.DatePicker;
-
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
-import com.example.schedulecreator.Models.Day;
-
 import java.util.Date;
 
 public  class DatePickerDialogFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
-    private final MutableLiveData<Date> starDate;
-    private final MutableLiveData<Date> endDate;
-    private MutableLiveData<Date> pickedDate;
+    private final MutableLiveData<Date> mStarDate;
+    private final MutableLiveData<Date> mEndDate;
+    private MutableLiveData<Date> mPickedDate;
     private StartOrEndDate mDateTag;
 
     public DatePickerDialogFragment( MutableLiveData<Date> startDate, MutableLiveData<Date> endDate, StartOrEndDate dateTag ){
-        this.starDate = startDate;
-        this.endDate = endDate;
+        this.mStarDate = startDate;
+        this.mEndDate = endDate;
         this.mDateTag = dateTag;
     }
 
@@ -40,32 +33,28 @@ public  class DatePickerDialogFragment extends DialogFragment
         DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year, month, day);
 
         if(mDateTag == StartOrEndDate.STAR_DATE){
-            pickedDate = starDate;
-            limitDate = endDate.getValue();
+            mPickedDate = mStarDate;
+            limitDate = mEndDate.getValue();
             if( limitDate != null ){
                 dialog.getDatePicker().setMaxDate( limitDate.getTime() );
             }
         }else if( mDateTag == StartOrEndDate.END_DATE){
-            pickedDate = endDate;
-            limitDate = starDate.getValue();
+            mPickedDate = mEndDate;
+            limitDate = mStarDate.getValue();
             if( limitDate != null ){
                 dialog.getDatePicker().setMinDate( limitDate.getTime() );
             }
         }
 
-        if( this.pickedDate.getValue() != null ){
-            c.setTime( this.pickedDate.getValue() );
+
+
+        if( this.mPickedDate.getValue() != null ){
+            c.setTime( this.mPickedDate.getValue() );
+            int startYear = c.get(Calendar.YEAR);
+            int startMonth = c.get(Calendar.MONTH);
+            int startDay = c.get(Calendar.DAY_OF_MONTH);
+            dialog.getDatePicker().updateDate( startYear, startMonth, startDay);
         }
-
-
-
-
-//        if( mDateTag == StartOrEndDate.END_DATE ){
-//            dialog.getDatePicker().setMaxDate( pickedDate.getValue().getTime() );
-//        }else if( mDateTag == StartOrEndDate.STAR_DATE ){
-//            dialog.getDatePicker().setMinDate( pickedDate.getValue().getTime() );
-//        }
-
 
         return dialog;
     }
@@ -76,9 +65,8 @@ public  class DatePickerDialogFragment extends DialogFragment
         calendar.set( Calendar.MONTH, month );
         calendar.set( calendar.DAY_OF_MONTH, day);
         Date date = calendar.getTime();
-        this.pickedDate.setValue( date );
+        this.mPickedDate.setValue( date );
 
-        // Do something with the date chosen by the user
     }
 
     public enum StartOrEndDate {

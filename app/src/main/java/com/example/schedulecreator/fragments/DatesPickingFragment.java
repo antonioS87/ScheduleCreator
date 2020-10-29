@@ -65,7 +65,8 @@ public class DatesPickingFragment extends Fragment {
         View view = inflater.inflate( R.layout.dates_picking_fragment_layout, container, false );
         mPickStartDateTv = view.findViewById( R.id.picked_start_date_tv );
         mPickEndDateTv = view.findViewById( R.id.picked_end_date_tv );
-
+        mStartDate = new ViewModelProvider(getActivity()).get( MainActivityViewModel.class ).getStartDate();
+        mEndDate = new ViewModelProvider(getActivity()).get( MainActivityViewModel.class ).getEndDate();
         mdatePickersController = new StarEndDatePickersController(
                 mPickStartDateTv,
                 mPickEndDateTv,
@@ -137,7 +138,7 @@ public class DatesPickingFragment extends Fragment {
                 mStartDate.observe(DatesPickingFragment.this, new Observer<Date>() {
                     @Override
                     public void onChanged(Date date) {
-                        Log.d("date_tag", " mPickStartDateTv date changed");
+                        Log.d("test_tag_antonio", " DatesPickingFragment start date changed: " + date.toString());
                         setStartTextTv( date );
                     }
                 });
@@ -173,7 +174,7 @@ public class DatesPickingFragment extends Fragment {
                     mStartDate.observe(DatesPickingFragment.this, new Observer<Date>() {
                         @Override
                         public void onChanged(Date date) {
-
+                            Log.d("test_tag_antonio", " DatesPickingFragment start date changed: " + date.toString());
                             setStartTextTv(date);
 
                         }

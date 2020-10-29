@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="4dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    app:cardCornerRadius="8dp"
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,7 +39,8 @@
         android:layout_toEndOf="@+id/pick_start_date_text"
         android:layout_marginTop="8dp"
         style="@style/EditTextStyle"
-        android:layout_marginLeft="8dp"
+        android:text="12 / 11 / 2020"
+        android:layout_marginLeft="16dp"
          />
     <View
         android:id="@+id/edit_text_initial_separator"
@@ -51,19 +63,20 @@
         android:text="@string/pick_end_date"
         android:textSize="16sp"
         android:textColor="@color/colorPrimary"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginLeft="8dp"/>
 
     <TextView
         android:id="@+id/picked_end_date_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
+        android:layout_marginTop="16dp"
         android:layout_below="@id/picked_start_date_tv"
         android:layout_toRightOf="@id/pick_end_date_text"
         android:layout_alignEnd="@id/picked_start_date_tv"
         style="@style/EditTextStyle"
-        android:layout_marginLeft="8dp" />
+        android:text="11 / 02 / 2021"
+        android:layout_marginLeft="16dp" />
 
     <View
         android:layout_width="match_parent"
@@ -73,6 +86,7 @@
         android:background="@drawable/edit_text_bottom_line"
         android:layout_toEndOf="@+id/pick_start_date_text"
         android:layout_marginLeft="8dp"
+        android:layout_marginBottom="4dp"
         />
 
     <ImageView
@@ -81,3 +95,5 @@
 
 
 </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

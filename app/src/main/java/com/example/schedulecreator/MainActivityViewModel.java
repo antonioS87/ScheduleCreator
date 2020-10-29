@@ -1,5 +1,7 @@
 package com.example.schedulecreator;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -12,17 +14,20 @@ import java.util.Date;
 
 public class MainActivityViewModel extends ViewModel {
 
+    private String DEBUG_TAG = getClass().getCanonicalName();
+
     //Start and end date of the schedule
     private MutableLiveData<Date> startDate = new MutableLiveData<>();
     private MutableLiveData<Date> endDate = new MutableLiveData<>();
-    private MutableLiveData<ArrayList<Worker>> mPersonnelList;
+    private MutableLiveData<ArrayList<Worker>> mPersonnelList = new MutableLiveData<>();
+    private WorkersRepo workersRepo = WorkersRepo.getInstance();
 
     //List of personnel
     private MutableLiveData<Worker> personnelList = new MutableLiveData<>();
 
     public MainActivityViewModel(){
         super();
-
+        Log.d(DEBUG_TAG, " contructor, object hashCode: " + hashCode());
         //Initializing dates
         Calendar c = Calendar.getInstance();
         startDate.setValue( c.getTime() );
@@ -49,7 +54,10 @@ public class MainActivityViewModel extends ViewModel {
 
 
     public MutableLiveData<ArrayList<Worker>> getPersonnelList() {
-        mPersonnelList = WorkersRepo.getInstance().getWorkersList();
+        Log.d("test_tag_antonio", " MainActivityViewModel hashCode: " + hashCode() + " workersRepo is null: " + Boolean.toString(workersRepo == null));
+        if( mPersonnelList.getValue() == null) {
+            WorkersRepo.getInstance().getWorkersList(mPersonnelList);
+        }
         return mPersonnelList;
     }
 }
