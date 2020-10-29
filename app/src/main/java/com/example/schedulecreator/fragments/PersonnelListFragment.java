@@ -44,7 +44,7 @@ public class PersonnelListFragment  extends Fragment {
         mPersonnelList = mViewModel.getPersonnelList();
         Log.d("test_tag_antonio", " PersonnelListFragment; onCreateView; mPersonnelList size: " + mPersonnelList.getValue().size());
         mPersonnelRecycleView = view.findViewById( R.id.personnel_recycler_view );
-        mLayoutManager = new StaggeredGridLayoutManager(4, RecyclerView.VERTICAL);
+        mLayoutManager = new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL);
         mPersonnelRecycleView.setLayoutManager( mLayoutManager );
 
 

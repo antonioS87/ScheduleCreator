@@ -14,6 +14,12 @@
         <item name="android:textColor">@color/list_view_name_color</item>
     </style>
 
+    <style name="Theme.AppCompat.NoActionBar.Fullscreen">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <style name="workerListTextView">
         <item name="android:textStyle">bold</item>
         <item name="android:textAlignment">center</item>

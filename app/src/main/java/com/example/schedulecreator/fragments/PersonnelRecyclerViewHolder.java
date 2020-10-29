@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.schedulecreator.DateUtils.CharacterUtil;
 import com.example.schedulecreator.Models.Worker;
 import com.example.schedulecreator.R;
 
@@ -32,9 +33,7 @@ public class PersonnelRecyclerViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 if(mSelected != null){
-                    Log.d("test_tag_antonio", " item clicked, workers last name: " + mWorkerLastNameTV.getText());
                     mSelected.setValue( !mSelected.getValue() );
-                    Log.d("test_tag_antonio", " item clicked, worker selected: " + mSelected.getValue());
                     changeBackground( mSelected.getValue() ? mColorPositive : mColorNegative );
                 }
 
@@ -52,7 +51,6 @@ public class PersonnelRecyclerViewHolder extends RecyclerView.ViewHolder {
 
 
     public void changeBackground( int color ){
-        Log.d("test_tag_antonio", " item clicked, background color change: " + color);
         mCardViewContainer.setCardBackgroundColor( color );
     }
 
@@ -66,7 +64,7 @@ public class PersonnelRecyclerViewHolder extends RecyclerView.ViewHolder {
         mColorNegative = resources.getColor(R.color.negative_color, null);
         mColorCodingView.setBackgroundColor( worker.getColor() );
 
-        mColorCodingView.setText( Character.toString( worker.getLastName().charAt(0)) + Character.toString( worker.getLastName().charAt(1)) );
+        mColorCodingView.setText(CharacterUtil.getFirstTwoCharactersCRO( worker.getLastName() ));
 
         changeBackground( mSelected.getValue() ? mColorPositive : mColorNegative );
 
