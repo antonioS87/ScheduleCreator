@@ -8,22 +8,18 @@ import java.util.ArrayList;
 
 public class Worker implements Comparable {
 
-    private String firstName;
-    private String lastName;
-    private String id;
-    private MutableLiveData<Boolean> selected = new MutableLiveData<>();
+    private String mFirstName;
+    private String mLastName;
+    private String mId;
+    private MutableLiveData<Boolean> mSelected = new MutableLiveData<>();
     private int mColor;
 
     public Worker( String lastName, String firstName, String id, Boolean selected ){
         Log.d("test_tag_antonio", " Worker constructor; first name: " + firstName + " last name: " + lastName + " id: " + id + " selected: " + selected);
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.id = id;
-        this.selected.setValue( selected );
-    }
-
-    public void addDay( Day day ){
-
+        this.mLastName = lastName;
+        this.mFirstName = firstName;
+        this.mId = id;
+        this.mSelected.setValue( selected );
     }
 
     public void setColor(int color ){
@@ -35,32 +31,32 @@ public class Worker implements Comparable {
     }
 
     public String getLastName(){
-        return this.lastName;
+        return this.mLastName;
     }
 
     public MutableLiveData<Boolean> getSelected() {
-        return selected;
+        return mSelected;
     }
 
     public String getFirstName() {
-        return firstName;
+        return mFirstName;
     }
 
     public void setName(String firstName) {
-        this.firstName = firstName;
+        this.mFirstName = firstName;
     }
 
     public String getId() {
-        return id;
+        return mId;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.mId = id;
     }
 
     @Override
     public int compareTo(Object o) {
 
-        return this.lastName.compareTo( ((Worker)o).lastName );
+        return this.mLastName.compareTo( ((Worker)o).mLastName );
     }
 }

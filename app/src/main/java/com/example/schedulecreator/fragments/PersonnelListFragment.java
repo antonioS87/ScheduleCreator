@@ -48,7 +48,8 @@ public class PersonnelListFragment  extends Fragment {
         mPersonnelRecycleView = view.findViewById( R.id.personnel_recycler_view );
         mLayoutManager = new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL);
         mPersonnelRecycleView.setLayoutManager( mLayoutManager );
-
+        mRecyclerAdapter = new PersonnelRecyclerAdapter( new ArrayList<Worker>() );
+        mPersonnelRecycleView.setAdapter( mRecyclerAdapter );
 
         //Setting
         mPersonnelList.observe(this, new Observer<ArrayList<Worker>>() {
@@ -58,6 +59,7 @@ public class PersonnelListFragment  extends Fragment {
                 if( mRecyclerAdapter == null ){
                     mRecyclerAdapter = new PersonnelRecyclerAdapter( workers );
                     mPersonnelRecycleView.setAdapter( mRecyclerAdapter);
+                    mRecyclerAdapter.notifyDataSetChanged();
                 }else{
                     mRecyclerAdapter.setWorkerList( workers );
                     mRecyclerAdapter.notifyDataSetChanged();

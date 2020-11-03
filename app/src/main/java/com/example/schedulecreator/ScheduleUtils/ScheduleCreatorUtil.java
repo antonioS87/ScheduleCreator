@@ -1,6 +1,5 @@
 package com.example.schedulecreator.ScheduleUtils;
 
-import com.example.schedulecreator.Models.Day;
 import com.example.schedulecreator.Models.Schedule;
 import com.example.schedulecreator.Models.Worker;
 
