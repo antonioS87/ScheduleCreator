@@ -1,28 +1,16 @@
 package com.example.schedulecreator.controllers;
-import android.app.Activity;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import com.example.schedulecreator.DateUtils.IDateFormaterUtil;
 import com.example.schedulecreator.dialogs.DatePickerDialogFragment;
-import com.example.schedulecreator.fragments.DatesPickingFragment;
-
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static android.provider.ContactsContract.CommonDataKinds.Event.START_DATE;
 
 public class StarEndDatePickersController {
 
@@ -47,20 +35,11 @@ public class StarEndDatePickersController {
 
     }
 
-
     private void initializeDatePickers(final FragmentActivity activity ){
 
         //Prevent keyboard from appearing when edit text is clicked
         mPickStartDateTv.setInputType( InputType.TYPE_NULL );
         mPickEndDateTv.setInputType( InputType.TYPE_NULL );
-
-//        //Set initial values
-//        if( mStarDate != null ){
-//            mPickStartDateTv.setText( mDateFormatterUtil.formatDateForEditText );
-//        }
-//        if( mInitialEndDate != null ){
-//            mPickStartDateTv.setText( mDateFormatterUtil.formatDateForEditText( mInitialEndDate) );
-//        }
 
         mStarDate.observe( activity , new Observer<Date>() {
             @Override
@@ -121,19 +100,16 @@ public class StarEndDatePickersController {
     }
 
     private void setEndDateTv(Date date) {
-
-        Log.d("date_tag", " setEndDateTv");
         mPickEndDateTv.setText( formatDateToString( date ) );
     }
 
 
     private void setStartTextTv(Date date) {
-        Log.d("date_tag", " setStartTextTv");
         mPickStartDateTv.setText( formatDateToString( date ) );
     }
 
     private String formatDateToString(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("dd / MM / YYYY");
+        SimpleDateFormat format = new SimpleDateFormat("dd / MM / yyyy");
         return format.format( date );
     }
 

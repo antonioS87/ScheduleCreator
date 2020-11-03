@@ -19,7 +19,7 @@ public class PersonnelRecyclerViewHolder extends RecyclerView.ViewHolder {
 
     private TextView mWorkerFirstNameTV;
     private TextView mWorkerLastNameTV;
-    private TextView mColorCodingView;
+//    private TextView mColorCodingView;
     private CardView mCardViewContainer;
     private MutableLiveData<Boolean> mSelected;
     private int mColorPositive;
@@ -43,7 +43,7 @@ public class PersonnelRecyclerViewHolder extends RecyclerView.ViewHolder {
         mWorkerLastNameTV = itemView.findViewById( R.id.worker_last_name_tv);
         mWorkerFirstNameTV = itemView.findViewById( R.id.worker_first_name_tv);
         mCardViewContainer = itemView.findViewById( R.id.personnel_list_item_card_view);
-        mColorCodingView = itemView.findViewById( R.id.color_coding_view );
+//        mColorCodingView = itemView.findViewById( R.id.color_coding_view );
 
 
     }
@@ -62,9 +62,9 @@ public class PersonnelRecyclerViewHolder extends RecyclerView.ViewHolder {
         mSelected = worker.getSelected();
         mColorPositive = resources.getColor(R.color.colorPrimary, null);
         mColorNegative = resources.getColor(R.color.negative_color, null);
-        mColorCodingView.setBackgroundColor( worker.getColor() );
+//        mColorCodingView.setText(CharacterUtil.getFirstTwoCharactersCRO( worker.getLastName() ));
 
-        mColorCodingView.setText(CharacterUtil.getFirstTwoCharactersCRO( worker.getLastName() ));
+//        mColorCodingView.setBackgroundColor( worker.getColor() );
 
         changeBackground( mSelected.getValue() ? mColorPositive : mColorNegative );
 

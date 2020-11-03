@@ -3,6 +3,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.DatePicker;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.MutableLiveData;
@@ -65,6 +66,7 @@ public  class DatePickerDialogFragment extends DialogFragment
         calendar.set( Calendar.MONTH, month );
         calendar.set( calendar.DAY_OF_MONTH, day);
         Date date = calendar.getTime();
+        Log.d("antonio",  " DatePickerDialog date picked: " + mDateTag + " date: " + calendar.getTime());
         this.mPickedDate.setValue( date );
 
     }

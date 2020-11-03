@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.schedulecreator.MainActivityViewModel;
 import com.example.schedulecreator.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -21,6 +22,7 @@ import java.util.Date;
 public class ScheduleCreatorFragment extends Fragment {
 
     private MainActivityViewModel mViewModel;
+    private FloatingActionButton generateScheduleBtn;
 
 
     @Nullable
@@ -40,8 +42,11 @@ public class ScheduleCreatorFragment extends Fragment {
 
         //DatesPickingFragment receives MutableLiveData<Date> objects from ViewModel and sets
         //their value. That way the ViewModel is notified of every date change
-        DatesPickingFragment datesFragment = DatesPickingFragment.newInstance( mViewModel.getStartDate(), mViewModel.getEndDate() );
-        PersonnelListFragment personnelListFragment = PersonnelListFragment.newInstance();
+        DatesPickingFragment datesFragment = DatesPickingFragment.newInstance(
+                mViewModel.getScheduleGeneratorSettings().getStartDate(),
+                mViewModel.getScheduleGeneratorSettings().getEndDate() );
+
+        PersonnelListFragment personnelListFragment = PersonnelListFragment.newInstance( mViewModel.getScheduleGeneratorSettings().getPersonnelList() );
 
         getChildFragmentManager().beginTransaction().
                 add( R.id.main_container, datesFragment, "dates_fragment").

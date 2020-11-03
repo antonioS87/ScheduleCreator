@@ -2,4 +2,8 @@
     <string name="app_name">ScheduleCreator</string>
     <string name="pick_start_date">Start date</string>
     <string name="pick_end_date">End date</string>
+    <string name="home_view">Home</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_generator">Generator</string>
+    <string name="nav_personnel">Personnel</string>
 </resources>

@@ -30,8 +30,9 @@ public class PersonnelListFragment  extends Fragment {
     private StaggeredGridLayoutManager mLayoutManager;
     private PersonnelRecyclerAdapter mRecyclerAdapter;
 
-    public static PersonnelListFragment newInstance() {
+    public static PersonnelListFragment newInstance( MutableLiveData<ArrayList<Worker>> personnelList) {
         PersonnelListFragment personnelListFragment = new PersonnelListFragment();
+        personnelListFragment.setPersonnelList( personnelList );
         return personnelListFragment;
     }
 
@@ -40,8 +41,9 @@ public class PersonnelListFragment  extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate( R.layout.personnel_list_fragment_layout, container, false);
 
-        mViewModel = new ViewModelProvider( this ).get( MainActivityViewModel.class );
-        mPersonnelList = mViewModel.getPersonnelList();
+        mViewModel = new ViewModelProvider( getActivity() ).get( MainActivityViewModel.class );
+        mPersonnelList = mViewModel.getScheduleGeneratorSettings().getPersonnelList();
+
         Log.d("test_tag_antonio", " PersonnelListFragment; onCreateView; mPersonnelList size: " + mPersonnelList.getValue().size());
         mPersonnelRecycleView = view.findViewById( R.id.personnel_recycler_view );
         mLayoutManager = new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL);
@@ -64,14 +66,12 @@ public class PersonnelListFragment  extends Fragment {
             }
         });
 
-
-
-
-
-
-
-
-
         return view;
     }
+
+    public void setPersonnelList( MutableLiveData<ArrayList<Worker>> personnelList ){
+        this.mPersonnelList = personnelList;
+    }
+
+
 }

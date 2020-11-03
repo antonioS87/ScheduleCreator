@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item android:id="@+id/nav_action_home"
+            android:title="@string/nav_home"
+            android:icon="@drawable/home_icon" />
+        <item android:id="@+id/nav_action_generator"
+            android:title="@string/nav_generator"
+            android:icon="@drawable/generator_icon" />
+        <item android:id="@+id/nav_action_personnel"
+            android:title="@string/nav_personnel"
+            android:icon="@drawable/personnel_icon" />
+
+
+</menu>
