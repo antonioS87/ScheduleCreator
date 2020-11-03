@@ -10,41 +10,19 @@ import java.util.Date;
 //Shedule is used to store ordered list of scheduled days
 public class Schedule {
 
-    private Date mStartDate;
-    private Date mEndDate;
-
-    private ArrayList<Day> schedule;
+    private ArrayList<ScheduledDay> mSchedule;
 
     public Schedule(){
 
-        this.mStartDate = getInitialStartDate();
-        this.mEndDate = null;
-        this.schedule = new ArrayList<>();
+        this.mSchedule = new ArrayList<>();
     }
 
-    public void addDay( Day day ){
-        this.schedule.add( day );
+    public void addDay( ScheduledDay day ){
+        this.mSchedule.add( day );
     }
 
-    public ArrayList<Day> getSchedule() {
-        return schedule;
-    }
-
-
-    public Date getStartDate() {
-        return mStartDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.mStartDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return mEndDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.mEndDate = endDate;
+    public ArrayList<ScheduledDay> getSchedule() {
+        return mSchedule;
     }
 
     private Date getInitialStartDate() {
