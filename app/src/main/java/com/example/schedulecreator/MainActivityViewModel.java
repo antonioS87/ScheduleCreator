@@ -44,4 +44,9 @@ public class MainActivityViewModel extends ViewModel {
         Log.d("test_tag_antonio", " MainActivityViewModel hashCode: " + hashCode() + " workersRepo is null: " + Boolean.toString(mWorkersRepo == null));
         return mScheduleGeneratorSettings;
     }
+
+    //Get rid of this
+    public void initializeDatabase(){
+        mWorkersRepo.initializeDatabase();
+    }
 }

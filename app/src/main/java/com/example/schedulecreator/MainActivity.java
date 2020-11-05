@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Obtain viewModel
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
-
         AppDatabase db = AppDatabase.initialize(this);
+        mViewModel.initializeDatabase();
         db = AppDatabase.getInstance();
         if( db == null){
             Log.d("antonio", " MainActivity; app database is empty");

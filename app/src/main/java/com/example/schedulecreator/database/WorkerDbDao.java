@@ -19,6 +19,10 @@ public interface WorkerDbDao {
     @Insert
     void insertWorker( Worker worker );
 
+    @Insert
+    void insertWorkers( List<Worker> workers );
+
+
     @Delete
     void deleteWorker( Worker worker );
 
