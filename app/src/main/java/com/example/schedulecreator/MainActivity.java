@@ -2,31 +2,25 @@ package com.example.schedulecreator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.res.ColorStateList;
-import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import com.example.schedulecreator.adapters.ScreenSlidePageAdapter;
-import com.example.schedulecreator.fragments.DatesPickingFragment;
+import com.example.schedulecreator.database.AppDatabase;
+import com.example.schedulecreator.database.Worker;
 import com.example.schedulecreator.fragments.PersonnelListFragment;
+import com.example.schedulecreator.fragments.PersonnelManagementFragment;
 import com.example.schedulecreator.fragments.ScheduleCreatorFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,6 +41,28 @@ public class MainActivity extends AppCompatActivity {
         //Obtain viewModel
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
 
+        AppDatabase db = AppDatabase.initialize(this);
+        db = AppDatabase.getInstance();
+        if( db == null){
+            Log.d("antonio", " MainActivity; app database is empty");
+        }
+
+
+        //DBtest
+        MutableLiveData<ArrayList<Worker>> testList = mViewModel.testDb();
+        testList.observe(this, new Observer<ArrayList<Worker>>() {
+            @Override
+            public void onChanged(ArrayList<Worker> workers) {
+                if (workers == null){
+                    Log.d("antonio", " MainActivity; testList change observed: null");
+                }else if ( workers.size() == 0){
+                    Log.d("antonio", " MainActivity; testList change observed: list is empty");
+                }else if( workers.size() > 0){
+                    Log.d("antonio", " MainActivity; testList change observed: list is empty");
+                }
+
+            }
+        });
 
         //Initialize fragment ViewPager
         mViewPager = findViewById( R.id.main_activity_view_pager );
@@ -54,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentList.add( PersonnelListFragment.newInstance( mViewModel.getScheduleGeneratorSettings().getPersonnelList() ) );
 //        fragmentList.add( DatesPickingFragment.newInstance( mViewModel.getScheduleGeneratorSettings().getStartDate(), mViewModel.getScheduleGeneratorSettings().getEndDate() ));
         fragmentList.add( new ScheduleCreatorFragment() );
-        fragmentList.add( DatesPickingFragment.newInstance( mViewModel.getScheduleGeneratorSettings().getStartDate(), mViewModel.getScheduleGeneratorSettings().getEndDate() ));
+        fragmentList.add( new PersonnelManagementFragment());
         mPagerAdapter = new ScreenSlidePageAdapter(getSupportFragmentManager(), getLifecycle());
         mPagerAdapter.setFragmentList( fragmentList );
         mViewPager.setAdapter( mPagerAdapter );

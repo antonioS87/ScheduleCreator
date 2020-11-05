@@ -2,6 +2,8 @@ package com.example.schedulecreator.Models;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.schedulecreator.database.Worker;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

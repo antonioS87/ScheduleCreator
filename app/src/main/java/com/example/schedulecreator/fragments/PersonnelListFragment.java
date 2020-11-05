@@ -16,11 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.schedulecreator.MainActivityViewModel;
-import com.example.schedulecreator.Models.Worker;
 import com.example.schedulecreator.R;
+import com.example.schedulecreator.database.Worker;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class PersonnelListFragment  extends Fragment {
 

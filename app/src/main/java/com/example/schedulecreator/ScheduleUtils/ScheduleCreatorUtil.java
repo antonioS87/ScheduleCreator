@@ -1,7 +1,7 @@
 package com.example.schedulecreator.ScheduleUtils;
 
 import com.example.schedulecreator.Models.Schedule;
-import com.example.schedulecreator.Models.Worker;
+import com.example.schedulecreator.database.Worker;
 
 import java.util.ArrayList;
 

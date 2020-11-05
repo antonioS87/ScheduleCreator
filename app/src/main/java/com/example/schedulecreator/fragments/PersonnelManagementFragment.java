@@ -19,6 +19,6 @@ public class PersonnelManagementFragment extends Fragment {
 
         View view = inflater.inflate( R.layout.personnel_management_fragment_layout, container, false);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 }
