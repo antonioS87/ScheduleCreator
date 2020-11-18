@@ -13,7 +13,7 @@ public class Worker  implements Comparable<Worker>{
     @NonNull
     @ColumnInfo( name = "id")
     private Integer mId;
-    @ColumnInfo( name = "firsName" )
+    @ColumnInfo( name = "firstName" )
     private String mFirstName;
     @ColumnInfo(name = "lastName")
     private String mLastName;
@@ -23,11 +23,10 @@ public class Worker  implements Comparable<Worker>{
     @Ignore
     private MutableLiveData<Boolean> mSelected = new MutableLiveData<>();
 
-    public Worker( String mFirstName, String mLastName, Integer mId){
+    public Worker( String mFirstName, String mLastName){
 //        Log.d("test_tag_antonio", " Worker constructor; first name: " + firstName + " last name: " + lastName + " id: " + id + " selected: " + selected);
         this.mLastName = mLastName;
         this.mFirstName = mFirstName;
-        this.mId = mId;
     }
 
     public int getId() {

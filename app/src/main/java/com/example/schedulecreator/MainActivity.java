@@ -40,13 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Obtain viewModel
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
-        AppDatabase db = AppDatabase.initialize(this);
-        mViewModel.initializeDatabase();
-        db = AppDatabase.getInstance();
-        if( db == null){
-            Log.d("antonio", " MainActivity; app database is empty");
-        }
-
 
         //DBtest
         MutableLiveData<ArrayList<Worker>> testList = mViewModel.testDb();
@@ -54,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(ArrayList<Worker> workers) {
                 if (workers == null){
-                    Log.d("antonio", " MainActivity; testList change observed: null");
+                    Log.d("antonio_db", " MainActivity; testList change observed: null");
                 }else if ( workers.size() == 0){
-                    Log.d("antonio", " MainActivity; testList change observed: list is empty");
+                    Log.d("antonio_db", " MainActivity; testList change observed: list is empty");
                 }else if( workers.size() > 0){
-                    Log.d("antonio", " MainActivity; testList change observed: list is empty");
+                    Log.d("antonio_db", " MainActivity; testList change observed: list is empty");
                 }
 
             }
@@ -76,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter( mPagerAdapter );
         mViewPager.setCurrentItem(0);
 
-        mViewModel.getScheduleGeneratorSettings().getStartDate().observe(this, new Observer<Date>() {
-            @Override
-            public void onChanged(Date date) {
-                Log.d("antonio", " start date change observed in main activity " + date);
-            }
-        });
+//        mViewModel.getScheduleGeneratorSettings().getStartDate().observe(this, new Observer<Date>() {
+//            @Override
+//            public void onChanged(Date date) {
+//                Log.d("antonio", " start date change observed in main activity " + date);
+//            }
+//        });
 
         //Connecting the bottom navigation and viewPager
         mBottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

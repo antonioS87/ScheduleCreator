@@ -56,6 +56,7 @@ public class WorkersRepo {
         Observable.fromRunnable(new Runnable() {
             @Override
             public void run() {
+                Log.d("antonio", " WorkersRepo; initializeDatabase(); inserting workers... ");
                 mDb.workerDao().insertWorkers( workers );
             }
         }).subscribeOn(Schedulers.io()).subscribe();
@@ -63,7 +64,7 @@ public class WorkersRepo {
 
     public void dbTest(final MutableLiveData<ArrayList<Worker>> workersList){
         mDb = AppDatabase.getInstance();
-
+        Log.d("antonio_db", " WorkersRepo; dbTest; db is null: " + Boolean.toString( mDb == null));
         Single<List<Worker>> dbDataFetch = mDb.workerDao().getAll() ;
 
         dbDataFetch.subscribeOn(Schedulers.io()).
@@ -76,6 +77,7 @@ public class WorkersRepo {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        Log.d("antonio", " WorkersRepo; dbTest; Single observable error: " + e.toString());
                         workersList.postValue(null);
                     }
                 });
@@ -111,14 +113,12 @@ public class WorkersRepo {
             String firstName = parts[0];
             String lastName = parts[1];
 //            Log.d("test_tag_antonio", " initializeWorkersList(), name: " + firstName + " last name: " + lastName);
-            Worker worker = new Worker( lastName, firstName, i);
+            Worker worker = new Worker( lastName, firstName);
             MutableLiveData<Boolean> selected = new MutableLiveData<>();
             selected.setValue( true );
             worker.setSelected( selected );
             worker.setColor( colorGenerator.getColor() );
             workers.add( worker );
-
-            i++;
 
         }
 
@@ -156,7 +156,7 @@ public class WorkersRepo {
             String firstName = parts[0];
             String lastName = parts[1];
 //            Log.d("test_tag_antonio", " initializeWorkersList(), name: " + firstName + " last name: " + lastName);
-            Worker worker = new Worker( lastName, firstName, i);
+            Worker worker = new Worker( lastName, firstName);
             MutableLiveData<Boolean> selected = new MutableLiveData<>();
             selected.setValue( true );
             worker.setSelected( selected );
@@ -168,7 +168,7 @@ public class WorkersRepo {
         }
 
         Collections.sort( workers);
-        mWorkersList.setValue( workers );
+//        mWorkersList.setValue( workers );
 
     }
 

@@ -8,26 +8,28 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Worker.class}, version = 2)
+@Database(entities = {Worker.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
-    public abstract WorkerDbDao workerDao();
     private static AppDatabase mInstance;
+    private static final String dbName = "scDb";
 
 
     public static AppDatabase initialize(Context context){
-        Log.d("antonio", " AppDatabase initialization start");
+        Log.d("antonio_db", " AppDatabase initialization start");
         synchronized (AppDatabase.class) {
             if (mInstance == null) {
                 mInstance = Room.databaseBuilder(context,
-                        AppDatabase.class, "database-name").build();
+                        AppDatabase.class, dbName).
+                        build();
 
 
             }
         }
-        Log.d("antonio", " AppDatabase initialization done");
+        Log.d("antonio_db", " AppDatabase initialization done");
         return mInstance;
     }
 
+    public abstract WorkerDbDao workerDao();
     public static AppDatabase getInstance(){
         return mInstance;
     }

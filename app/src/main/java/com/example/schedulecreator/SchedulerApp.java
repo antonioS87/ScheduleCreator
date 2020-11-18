@@ -8,5 +8,14 @@ import com.example.schedulecreator.repositories.WorkersRepo;
 public class SchedulerApp extends Application {
 
     //Initializing database
-    private AppDatabase db = AppDatabase.initialize( getApplicationContext() );
+    private static AppDatabase db;
+
+    @Override
+    public void onCreate() {
+        db = AppDatabase.initialize( getApplicationContext() );
+        super.onCreate();
+
+    }
+
+
 }
