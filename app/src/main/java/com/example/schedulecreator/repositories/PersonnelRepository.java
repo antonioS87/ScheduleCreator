@@ -67,7 +67,7 @@ public class PersonnelRepository implements PersonnelRepoManager {
     }
 
     @Override
-    public void requestWorkerListRefres() {
+    public void requestWorkerListRefresh() {
 
     }
 
