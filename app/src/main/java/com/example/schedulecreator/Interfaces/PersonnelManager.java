@@ -6,8 +6,6 @@ import com.example.schedulecreator.database.Worker;
 
 import java.util.ArrayList;
 
-public interface PersonnelCRUDInterface {
-    void addWorker(Worker worker);
-    boolean updateWorker(Worker worker);
-    boolean deleteWorker(Worker worker);
+public interface PersonnelManager extends PersonnelCRUDInterface{
+    void getObservableWorkersList(LiveData<ArrayList<Worker>> workersList);
 }
