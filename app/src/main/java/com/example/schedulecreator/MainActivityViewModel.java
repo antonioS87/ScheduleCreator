@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.schedulecreator.Models.ScheduleGeneratorSettings;
 import com.example.schedulecreator.database.Worker;
-import com.example.schedulecreator.repositories.WorkersRepo;
+import com.example.schedulecreator.repositories.PersonnelRepository;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public class MainActivityViewModel extends ViewModel {
     private String DEBUG_TAG = getClass().getCanonicalName();
 
     private ScheduleGeneratorSettings mScheduleGeneratorSettings;
-    private WorkersRepo mWorkersRepo = WorkersRepo.getInstance();
+    private PersonnelRepository mPersonnelRepository = PersonnelRepository.getInstance();
 
     public MainActivityViewModel(){
         super();
@@ -26,27 +26,17 @@ public class MainActivityViewModel extends ViewModel {
         refreshSchedulerCreatorPersonnelList();
     }
 
-    public MutableLiveData<ArrayList<Worker>> testDb(){
-        MutableLiveData<ArrayList<Worker>> testList = new MutableLiveData<>();
-
-        mWorkersRepo.dbTest(testList );
-        return testList;
-    }
-
     private void refreshSchedulerCreatorPersonnelList() {
-        Log.d("test_tag_antonio", " MainActivityViewModel hashCode: " + hashCode() + " workersRepo is null: " + Boolean.toString(mWorkersRepo == null));
-        WorkersRepo.getInstance().getWorkersList( mScheduleGeneratorSettings.getPersonnelList() );
+        Log.d("test_tag_antonio", " MainActivityViewModel hashCode: " + hashCode() + " workersRepo is null: " + Boolean.toString(mPersonnelRepository == null));
+
         return;
     }
 
 
     public ScheduleGeneratorSettings getScheduleGeneratorSettings() {
-        Log.d("test_tag_antonio", " MainActivityViewModel hashCode: " + hashCode() + " workersRepo is null: " + Boolean.toString(mWorkersRepo == null));
+        Log.d("test_tag_antonio", " MainActivityViewModel hashCode: " + hashCode() + " workersRepo is null: " + Boolean.toString(mPersonnelRepository == null));
         return mScheduleGeneratorSettings;
     }
 
-    //Get rid of this
-    public void initializeDatabase(){
-        mWorkersRepo.initializeDatabase();
-    }
+
 }

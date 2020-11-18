@@ -41,21 +41,7 @@ public class MainActivity extends AppCompatActivity {
         //Obtain viewModel
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
 
-        //DBtest
-        MutableLiveData<ArrayList<Worker>> testList = mViewModel.testDb();
-        testList.observe(this, new Observer<ArrayList<Worker>>() {
-            @Override
-            public void onChanged(ArrayList<Worker> workers) {
-                if (workers == null){
-                    Log.d("antonio_db", " MainActivity; testList change observed: null");
-                }else if ( workers.size() == 0){
-                    Log.d("antonio_db", " MainActivity; testList change observed: list is empty");
-                }else if( workers.size() > 0){
-                    Log.d("antonio_db", " MainActivity; testList change observed: list is empty");
-                }
 
-            }
-        });
 
         //Initialize fragment ViewPager
         mViewPager = findViewById( R.id.main_activity_view_pager );

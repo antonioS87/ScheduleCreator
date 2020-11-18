@@ -6,4 +6,5 @@
     <string name="nav_home">Home</string>
     <string name="nav_generator">Generator</string>
     <string name="nav_personnel">Personnel</string>
+    <string name="personnelManagementFragmentTitle">Personnel Management</string>
 </resources>

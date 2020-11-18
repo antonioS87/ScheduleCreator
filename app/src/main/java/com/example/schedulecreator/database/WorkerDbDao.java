@@ -14,7 +14,7 @@ import io.reactivex.rxjava3.core.Single;
 @Dao
 public interface WorkerDbDao {
     @Query("SELECT * FROM workers")
-    Single<List<Worker>> getAll();
+    List<Worker> getAll();
 
     @Insert
     void insertWorker( Worker worker );
