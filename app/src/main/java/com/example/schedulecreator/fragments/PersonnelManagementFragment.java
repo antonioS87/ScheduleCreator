@@ -7,11 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.schedulecreator.Interfaces.PersonnelManager;
-import com.example.schedulecreator.MainActivityViewModel;
+import com.example.schedulecreator.ViewModels.MainActivityViewModel;
 import com.example.schedulecreator.R;
 import com.example.schedulecreator.dialogs.DialogsHandler;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,7 +31,8 @@ public class PersonnelManagementFragment extends Fragment {
         mPersonnelManager = new ViewModelProvider(getActivity()).get(MainActivityViewModel.class);
 
         mAddWorkerButton.setOnClickListener( view1 -> {
-            DialogsHandler.getAddWorkerDialog("Neki naslov");
+            DialogFragment addworkerDialog = DialogsHandler.getAddWorkerDialog(mPersonnelManager);
+            addworkerDialog.show(getFragmentManager(), "add_worker_dialog");
         });
 
         return view;

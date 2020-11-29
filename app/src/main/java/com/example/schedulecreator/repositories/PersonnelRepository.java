@@ -79,13 +79,6 @@ public class PersonnelRepository implements PersonnelRepoManager {
     public static PersonnelRepository getInstance(){
         return Loader.INSTANCE;
     }
-
-
-
-
-
-
-
 //
 //                "Nada,Bukovec",
 //                "Lidija,Gajski",

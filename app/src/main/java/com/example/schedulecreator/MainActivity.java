@@ -3,8 +3,6 @@ package com.example.schedulecreator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -12,16 +10,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.schedulecreator.ViewModels.MainActivityViewModel;
 import com.example.schedulecreator.adapters.ScreenSlidePageAdapter;
-import com.example.schedulecreator.database.AppDatabase;
-import com.example.schedulecreator.database.Worker;
 import com.example.schedulecreator.fragments.PersonnelListFragment;
 import com.example.schedulecreator.fragments.PersonnelManagementFragment;
 import com.example.schedulecreator.fragments.ScheduleCreatorFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = findViewById( R.id.main_activity_view_pager );
         ArrayList<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add( PersonnelListFragment.newInstance( mViewModel.getScheduleGeneratorSettings().getPersonnelList() ) );
-//        fragmentList.add( DatesPickingFragment.newInstance( mViewModel.getScheduleGeneratorSettings().getStartDate(), mViewModel.getScheduleGeneratorSettings().getEndDate() ));
         fragmentList.add( new ScheduleCreatorFragment() );
         fragmentList.add( new PersonnelManagementFragment());
         mPagerAdapter = new ScreenSlidePageAdapter(getSupportFragmentManager(), getLifecycle());
@@ -55,12 +50,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter( mPagerAdapter );
         mViewPager.setCurrentItem(0);
 
-//        mViewModel.getScheduleGeneratorSettings().getStartDate().observe(this, new Observer<Date>() {
-//            @Override
-//            public void onChanged(Date date) {
-//                Log.d("antonio", " start date change observed in main activity " + date);
-//            }
-//        });
 
         //Connecting the bottom navigation and viewPager
         mBottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

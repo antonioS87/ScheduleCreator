@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.example.schedulecreator.MainActivityViewModel;
+import com.example.schedulecreator.ViewModels.MainActivityViewModel;
 import com.example.schedulecreator.R;
 import com.example.schedulecreator.database.Worker;
 

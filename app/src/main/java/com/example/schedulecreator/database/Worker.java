@@ -29,7 +29,7 @@ public class Worker  implements Comparable<Worker>{
         this.mFirstName = mFirstName;
     }
 
-    public int getId() {
+    public Integer getId() {
         return mId;
     }
 

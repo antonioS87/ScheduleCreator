@@ -12,7 +12,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.schedulecreator.DateUtils.DateFormater;
-import com.example.schedulecreator.MainActivityViewModel;
+import com.example.schedulecreator.ViewModels.MainActivityViewModel;
 import com.example.schedulecreator.R;
 import com.example.schedulecreator.controllers.StarEndDatePickersController;
 import java.util.Date;

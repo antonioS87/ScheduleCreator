@@ -4,10 +4,12 @@ import android.content.Context;
 
 import androidx.fragment.app.FragmentManager;
 
+import com.example.schedulecreator.Interfaces.PersonnelManager;
+
 public class DialogsHandler {
 
-    public static  AddWorkerDialog getAddWorkerDialog(String title){
+    public static  AddWorkerDialog getAddWorkerDialog(PersonnelManager personnelManager){
 
-        return AddWorkerDialog.newInstance(title);
+        return AddWorkerDialog.newInstance(personnelManager);
     }
 }

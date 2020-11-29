@@ -7,4 +7,11 @@
     <string name="nav_generator">Generator</string>
     <string name="nav_personnel">Personnel</string>
     <string name="personnelManagementFragmentTitle">Personnel Management</string>
+    <string name="new_worker_firstName_tv_text">First Name: </string>
+    <string name="new_worker_lastName_tv_text">Last Name: </string>
+    <string name="add_new_worker_button_text">ADD WORKER</string>
+    <string name="cancel_add_new_worker_button_text">CLOSE</string>
+    <string name="new_worker_dialog_title">ADD NEW WORKER</string>
+    <string name="no_last_first_name_snackbar_text">First and last name can\'t be empty.</string>
+    <string name="worker_added_snackbar_text">Worker added</string>
 </resources>
