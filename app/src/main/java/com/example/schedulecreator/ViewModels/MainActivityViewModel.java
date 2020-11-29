@@ -13,22 +13,31 @@ import com.example.schedulecreator.database.Worker;
 import com.example.schedulecreator.repositories.PersonnelRepository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
-public class MainActivityViewModel extends ViewModel implements PersonnelManager, PersonnelRepositoryListener {
+public class MainActivityViewModel extends ViewModel implements PersonnelRepoManager {
 
     private String DEBUG_TAG = getClass().getCanonicalName();
 
     private static ScheduleGeneratorSettings mScheduleGeneratorSettings;
     private PersonnelRepoManager mPersonnelRepoManager = PersonnelRepository.getInstance();
+    private LiveData<ArrayList<Worker>> mWorkerList;
+    private HashMap<Integer, Worker> mWorkerHashMap;
 
     public MainActivityViewModel(){
         super();
         //Initializing schedule creator settings
         mScheduleGeneratorSettings = new ScheduleGeneratorSettings();
         refreshSchedulerCreatorPersonnelList();
+
+        mWorkerList = new MutableLiveData<ArrayList<Worker>>();
+        mWorkerHashMap = new HashMap<>();
+
+
     }
+
 
     private void refreshSchedulerCreatorPersonnelList() {
         return;
@@ -47,8 +56,8 @@ public class MainActivityViewModel extends ViewModel implements PersonnelManager
     }
 
     @Override
-    public void getObservableWorkersList(LiveData<ArrayList<Worker>> workersList) {
-
+    public LiveData<ArrayList<Worker>> getObservableWorkersList() {
+        return mPersonnelRepoManager.getObservableWorkersList();
     }
 
     @Override
@@ -61,28 +70,6 @@ public class MainActivityViewModel extends ViewModel implements PersonnelManager
         return false;
     }
 
-    @Override
-    public void workersListChanged(List<Worker> workerList) {
 
-    }
 
-    @Override
-    public void onWorkerAdded(Worker worker) {
-        Log.d("test_tag", " MainActivityViewModel repo listener: worker added: " + worker.getFirstName() + " " + worker.getLastName());
-    }
-
-    @Override
-    public void onWorkerUpdated(Worker worker) {
-
-    }
-
-    @Override
-    public void onWorkerDeleted(Worker worker) {
-
-    }
-
-    @Override
-    public void onSubscribe(List<Worker> workersList) {
-
-    }
 }

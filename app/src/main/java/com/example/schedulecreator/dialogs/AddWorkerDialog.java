@@ -1,7 +1,9 @@
 package com.example.schedulecreator.dialogs;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +15,12 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.ButtonBarLayout;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.schedulecreator.Interfaces.PersonnelManager;
+import com.example.schedulecreator.Interfaces.PersonnelRepoManager;
 import com.example.schedulecreator.R;
+import com.example.schedulecreator.ViewModels.MainActivityViewModel;
 import com.example.schedulecreator.database.Worker;
 import com.google.android.material.snackbar.Snackbar;
 // ...
@@ -26,17 +31,14 @@ public class AddWorkerDialog extends DialogFragment {
     private EditText mLastNameET;
     private Button mAddWorkerButton;
     private Button mCancelAddWorkerButton;
-    private PersonnelManager mPersonnelManager;
+    private PersonnelRepoManager mPersonnelManager;
 
-    public AddWorkerDialog(PersonnelManager personnelManager) {
-        mPersonnelManager = personnelManager;
-        // Empty constructor is required for DialogFragment
-        // Make sure not to add arguments to the constructor
-        // Use `newInstance` instead as shown below
+    public AddWorkerDialog() {
+
     }
 
-    public static AddWorkerDialog newInstance(PersonnelManager personnelManager) {
-        AddWorkerDialog addWorkerDialog = new AddWorkerDialog(personnelManager);
+    public static AddWorkerDialog newInstance() {
+        AddWorkerDialog addWorkerDialog = new AddWorkerDialog();
         return addWorkerDialog;
     }
 
@@ -50,6 +52,7 @@ public class AddWorkerDialog extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Get field from view
+        mPersonnelManager = new ViewModelProvider(getActivity()).get(MainActivityViewModel.class);
         mFirstNameET = view.findViewById(R.id.new_worker_firstName_et);
         mLastNameET = view.findViewById(R.id.new_worker_lastName_et);
         mAddWorkerButton = view.findViewById(R.id.add_new_worker_button);

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 public interface PersonnelRepoManager extends PersonnelCRUDInterface  {
-    void addPersonnelRepositoryListener(PersonnelRepositoryListener personnelRepositoryListener);
-    void requestWorkerListRefresh();
+    LiveData<ArrayList<Worker>> getObservableWorkersList();
 
 }

@@ -12,6 +12,7 @@ import com.example.schedulecreator.database.Worker;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -26,26 +27,37 @@ public class PersonnelRepository implements PersonnelRepoManager {
 
     private MutableLiveData<ArrayList<Worker>> mWorkersList;
     private static AppDatabase mDb;
-    private List<PersonnelRepositoryListener> mPersonnelRepoListeners = new ArrayList<>();
 
 
     private PersonnelRepository(){
         mDb = AppDatabase.getInstance();
+        mWorkersList = new MutableLiveData<>();
+        getWorkersFromDB();
     }
+
 
     @Override
     public void addWorker(Worker worker) {
         Observable.fromRunnable(new Runnable() {
             @Override
             public void run() {
-                Log.d("antonio", " WorkersRepo; adding worker... ");
+                Log.d("worker", " WorkersRepo; adding worker... ");
                 mDb.workerDao().insertWorker( worker );
-                for(PersonnelRepositoryListener listener : mPersonnelRepoListeners){
-                    listener.onWorkerAdded(worker);
-                }
+                mWorkersList.getValue().add(worker);
+                mWorkersList.postValue(mWorkersList.getValue());
             }
         }).subscribeOn(Schedulers.io()).subscribe();
 
+    }
+
+    private void getWorkersFromDB(){
+        Observable.fromRunnable(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("worker", " WorkersRepo; getting workers from db... ");
+                mWorkersList.postValue(new ArrayList<>( mDb.workerDao().getAll()) );
+            }
+        }).subscribeOn(Schedulers.io()).subscribe();
     }
 
 
@@ -59,16 +71,10 @@ public class PersonnelRepository implements PersonnelRepoManager {
         return false;
     }
 
-    @Override
-    public void addPersonnelRepositoryListener(PersonnelRepositoryListener personnelRepositoryListener) {
-        mPersonnelRepoListeners.add(personnelRepositoryListener);
-
-
-    }
 
     @Override
-    public void requestWorkerListRefresh() {
-
+    public LiveData<ArrayList<Worker>> getObservableWorkersList() {
+        return mWorkersList;
     }
 
 

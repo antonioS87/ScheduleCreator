@@ -7,5 +7,5 @@ import com.example.schedulecreator.database.Worker;
 import java.util.ArrayList;
 
 public interface PersonnelManager extends PersonnelCRUDInterface{
-    void getObservableWorkersList(LiveData<ArrayList<Worker>> workersList);
+    LiveData<ArrayList<Worker>> getObservableWorkersList();
 }

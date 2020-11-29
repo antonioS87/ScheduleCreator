@@ -3,6 +3,7 @@ package com.example.schedulecreator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 
 import com.example.schedulecreator.ViewModels.MainActivityViewModel;
 import com.example.schedulecreator.adapters.ScreenSlidePageAdapter;
+import com.example.schedulecreator.database.Worker;
 import com.example.schedulecreator.fragments.PersonnelListFragment;
 import com.example.schedulecreator.fragments.PersonnelManagementFragment;
 import com.example.schedulecreator.fragments.ScheduleCreatorFragment;
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         mPagerAdapter.setFragmentList( fragmentList );
         mViewPager.setAdapter( mPagerAdapter );
         mViewPager.setCurrentItem(0);
+
+
 
 
         //Connecting the bottom navigation and viewPager
