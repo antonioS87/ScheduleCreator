@@ -1,5 +1,6 @@
 package com.example.schedulecreator.fragments;
 
+import android.app.Activity;
 import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.schedulecreator.R;
@@ -17,12 +19,14 @@ import java.util.ArrayList;
 public class PersonnelManagerRecyclerAdapter extends RecyclerView.Adapter<EditWorkerViewHolder> {
 
     private ArrayList<Worker> mWorkerList;
+    private FragmentManager mFragmentManager;
 
     public PersonnelManagerRecyclerAdapter(ArrayList<Worker> workerList){
         this.mWorkerList = workerList;
     }
 
-    public void setWorkerList(ArrayList<Worker> mWorkerList) {
+    public void setWorkerList(ArrayList<Worker> mWorkerList, FragmentManager fragmentManager) {
+        mFragmentManager = fragmentManager;
         this.mWorkerList = mWorkerList;
     }
 
@@ -38,7 +42,7 @@ public class PersonnelManagerRecyclerAdapter extends RecyclerView.Adapter<EditWo
     @Override
     public void onBindViewHolder(@NonNull EditWorkerViewHolder holder, int position) {
 
-        holder.initializeHolder( mWorkerList.get( position ) );
+        holder.initializeHolder( mWorkerList.get( position ), mFragmentManager);
 
     }
 

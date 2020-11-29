@@ -51,12 +51,7 @@ public class PersonnelManagementFragment extends Fragment {
         mPersonnelManager.getObservableWorkersList().observe(getActivity(), new Observer<ArrayList<Worker>>() {
             @Override
             public void onChanged(ArrayList<Worker> workers) {
-                Log.d("worker", " personnelmanagementfragment - data changed");
-                for(Worker worker : workers){
-                    Log.d("worker", " PMF; worker: " + worker.getFirstName() + " " +worker.getLastName());
-
-                }
-                mPersonnelRvAdapter.setWorkerList( workers );
+                mPersonnelRvAdapter.setWorkerList( workers, getFragmentManager());
                 mPersonnelRvAdapter.notifyDataSetChanged();
             }
         });

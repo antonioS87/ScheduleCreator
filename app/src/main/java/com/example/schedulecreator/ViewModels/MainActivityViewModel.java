@@ -61,8 +61,9 @@ public class MainActivityViewModel extends ViewModel implements PersonnelRepoMan
     }
 
     @Override
-    public boolean updateWorker(Worker worker) {
-        return false;
+    public void updateWorker(Worker worker) {
+        mPersonnelRepoManager.updateWorker(worker);
+
     }
 
     @Override

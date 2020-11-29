@@ -62,8 +62,16 @@ public class PersonnelRepository implements PersonnelRepoManager {
 
 
     @Override
-    public boolean updateWorker(Worker worker) {
-        return false;
+    public void updateWorker(Worker worker) {
+        Observable.fromRunnable(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("worker", " WorkersRepo; adding worker... ");
+                mDb.workerDao().updateWorker( worker );
+                mWorkersList.postValue(new ArrayList<>(mDb.workerDao().getAll()));
+            }
+        }).subscribeOn(Schedulers.io()).subscribe();
+
     }
 
     @Override

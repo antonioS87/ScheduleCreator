@@ -8,6 +8,6 @@ import java.util.ArrayList;
 
 public interface PersonnelCRUDInterface {
     void addWorker(Worker worker);
-    boolean updateWorker(Worker worker);
+    void updateWorker(Worker worker);
     boolean deleteWorker(Worker worker);
 }
