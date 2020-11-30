@@ -8,10 +8,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.schedulecreator.fragments.DatesPickingFragment;
-import com.example.schedulecreator.fragments.PersonnelListFragment;
-import com.example.schedulecreator.fragments.ScheduleCreatorFragment;
-
 import java.util.ArrayList;
 
 public class ScreenSlidePageAdapter extends FragmentStateAdapter {

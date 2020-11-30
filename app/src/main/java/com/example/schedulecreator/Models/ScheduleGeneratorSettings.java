@@ -1,14 +1,16 @@
 package com.example.schedulecreator.Models;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.schedulecreator.Interfaces.SchedulerSettingsManager;
 import com.example.schedulecreator.database.Worker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ScheduleGeneratorSettings {
+public class ScheduleGeneratorSettings implements SchedulerSettingsManager {
 
     //Start and end date of the schedule
     private MutableLiveData<Date> mStartDate;
@@ -25,19 +27,30 @@ public class ScheduleGeneratorSettings {
         mEndDate.setValue( c.getTime() );
     }
 
-    public MutableLiveData<Date> getStartDate() {
+    public LiveData<Date> getStartDate() {
         return mStartDate;
     }
 
-    public MutableLiveData<Date> getEndDate() {
+    public LiveData<Date> getEndDate() {
         return mEndDate;
     }
 
-    public MutableLiveData<ArrayList<Worker>> getPersonnelList() {
+    @Override
+    public LiveData<ArrayList<Worker>> getSchedulerSettPersonnelList() {
         return mPersonnelList;
     }
 
-    public void setPersonnelList(MutableLiveData<ArrayList<Worker>> personnelList) {
-        mPersonnelList = personnelList;
+    @Override
+    public void setStartDate(Date startDate) {
+        mStartDate.setValue(startDate);
+    }
+
+    @Override
+    public void setEndDate(Date endDate) {
+        mEndDate.setValue(endDate);
+    }
+
+    public void setPersonnelList(ArrayList<Worker> personnelList) {
+        mPersonnelList.setValue(personnelList);
     }
 }

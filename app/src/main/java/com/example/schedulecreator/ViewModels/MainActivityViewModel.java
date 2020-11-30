@@ -3,46 +3,43 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.example.schedulecreator.Interfaces.PersonnelManager;
 import com.example.schedulecreator.Interfaces.PersonnelRepoManager;
 import com.example.schedulecreator.Interfaces.PersonnelRepositoryListener;
+import com.example.schedulecreator.Interfaces.SchedulerSettingsManager;
 import com.example.schedulecreator.Models.ScheduleGeneratorSettings;
 import com.example.schedulecreator.database.Worker;
 import com.example.schedulecreator.repositories.PersonnelRepository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 
-public class MainActivityViewModel extends ViewModel implements PersonnelRepoManager {
+public class MainActivityViewModel extends ViewModel implements PersonnelRepoManager, SchedulerSettingsManager {
 
     private String DEBUG_TAG = getClass().getCanonicalName();
 
     private static ScheduleGeneratorSettings mScheduleGeneratorSettings;
     private PersonnelRepoManager mPersonnelRepoManager = PersonnelRepository.getInstance();
-    private LiveData<ArrayList<Worker>> mWorkerList;
-    private HashMap<Integer, Worker> mWorkerHashMap;
+
 
     public MainActivityViewModel(){
         super();
         //Initializing schedule creator settings
         mScheduleGeneratorSettings = new ScheduleGeneratorSettings();
-        refreshSchedulerCreatorPersonnelList();
-
-        mWorkerList = new MutableLiveData<ArrayList<Worker>>();
-        mWorkerHashMap = new HashMap<>();
-
+        mPersonnelRepoManager.getObservableWorkersList().observeForever( new Observer<ArrayList<Worker>>() {
+            @Override
+            public void onChanged(ArrayList<Worker> workers) {
+                mScheduleGeneratorSettings.setPersonnelList(workers);
+            }
+        });
 
     }
-
-
-    private void refreshSchedulerCreatorPersonnelList() {
-        return;
-    }
-
 
     public ScheduleGeneratorSettings getScheduleGeneratorSettings() {
         return mScheduleGeneratorSettings;
@@ -72,5 +69,28 @@ public class MainActivityViewModel extends ViewModel implements PersonnelRepoMan
     }
 
 
+    @Override
+    public LiveData<Date> getStartDate() {
+        return mScheduleGeneratorSettings.getStartDate();
+    }
 
+    @Override
+    public LiveData<Date> getEndDate() {
+        return mScheduleGeneratorSettings.getEndDate();
+    }
+
+    @Override
+    public LiveData<ArrayList<Worker>> getSchedulerSettPersonnelList() {
+        return mScheduleGeneratorSettings.getSchedulerSettPersonnelList();
+    }
+
+    @Override
+    public void setStartDate(Date startDate) {
+        mScheduleGeneratorSettings.setStartDate(startDate);
+    }
+
+    @Override
+    public void setEndDate(Date endDate) {
+        mScheduleGeneratorSettings.setEndDate(endDate);
+    }
 }

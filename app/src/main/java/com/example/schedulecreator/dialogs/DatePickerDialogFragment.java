@@ -6,21 +6,27 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.DatePicker;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import com.example.schedulecreator.Interfaces.SchedulerSettingsManager;
+
 import java.util.Date;
 
 public  class DatePickerDialogFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
-    private final MutableLiveData<Date> mStarDate;
-    private final MutableLiveData<Date> mEndDate;
-    private MutableLiveData<Date> mPickedDate;
+    private final LiveData<Date> mStarDate;
+    private final LiveData<Date> mEndDate;
+    private LiveData<Date> mPickedDate;
     private StartOrEndDate mDateTag;
+    private SchedulerSettingsManager mSchedulerSettingsMng;
 
-    public DatePickerDialogFragment( MutableLiveData<Date> startDate, MutableLiveData<Date> endDate, StartOrEndDate dateTag ){
-        this.mStarDate = startDate;
-        this.mEndDate = endDate;
-        this.mDateTag = dateTag;
+    public DatePickerDialogFragment( SchedulerSettingsManager schedulerSettingsManager, StartOrEndDate dateTag  ){
+        mSchedulerSettingsMng = schedulerSettingsManager;
+        mStarDate = mSchedulerSettingsMng.getStartDate();
+        mEndDate = mSchedulerSettingsMng.getEndDate();
+        mDateTag = dateTag;
     }
 
     @Override
@@ -47,8 +53,6 @@ public  class DatePickerDialogFragment extends DialogFragment
             }
         }
 
-
-
         if( this.mPickedDate.getValue() != null ){
             c.setTime( this.mPickedDate.getValue() );
             int startYear = c.get(Calendar.YEAR);
@@ -67,7 +71,11 @@ public  class DatePickerDialogFragment extends DialogFragment
         calendar.set( calendar.DAY_OF_MONTH, day);
         Date date = calendar.getTime();
         Log.d("antonio",  " DatePickerDialog date picked: " + mDateTag + " date: " + calendar.getTime());
-        this.mPickedDate.setValue( date );
+        if(mDateTag == StartOrEndDate.STAR_DATE){
+            mSchedulerSettingsMng.setStartDate(date);
+        }else if(mDateTag == StartOrEndDate.END_DATE){
+            mSchedulerSettingsMng.setEndDate(date);
+        }
 
     }
 

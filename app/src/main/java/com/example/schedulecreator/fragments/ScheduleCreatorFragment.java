@@ -10,13 +10,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.schedulecreator.Interfaces.SchedulerSettingsManager;
 import com.example.schedulecreator.ViewModels.MainActivityViewModel;
 import com.example.schedulecreator.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ScheduleCreatorFragment extends Fragment {
 
-    private MainActivityViewModel mViewModel;
+    private SchedulerSettingsManager mSchedulerSettingsMng;
     private FloatingActionButton generateScheduleBtn;
 
 
@@ -33,15 +34,10 @@ public class ScheduleCreatorFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        mViewModel = new ViewModelProvider(getActivity()).get(MainActivityViewModel.class);
+        mSchedulerSettingsMng = new ViewModelProvider(getActivity()).get(MainActivityViewModel.class);
 
-        //DatesPickingFragment receives MutableLiveData<Date> objects from ViewModel and sets
-        //their value. That way the ViewModel is notified of every date change
-        DatesPickingFragment datesFragment = DatesPickingFragment.newInstance(
-                mViewModel.getScheduleGeneratorSettings().getStartDate(),
-                mViewModel.getScheduleGeneratorSettings().getEndDate() );
-
-        PersonnelListFragment personnelListFragment = PersonnelListFragment.newInstance( mViewModel.getScheduleGeneratorSettings().getPersonnelList() );
+        DatesPickingFragment datesFragment = new DatesPickingFragment();
+        SchedulerCreatorPersonnelListFragment personnelListFragment = new SchedulerCreatorPersonnelListFragment();
 
         getChildFragmentManager().beginTransaction().
                 add( R.id.main_container, datesFragment, "dates_fragment").

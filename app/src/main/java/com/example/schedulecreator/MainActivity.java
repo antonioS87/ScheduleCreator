@@ -3,7 +3,6 @@ package com.example.schedulecreator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -13,8 +12,7 @@ import android.view.MenuItem;
 
 import com.example.schedulecreator.ViewModels.MainActivityViewModel;
 import com.example.schedulecreator.adapters.ScreenSlidePageAdapter;
-import com.example.schedulecreator.database.Worker;
-import com.example.schedulecreator.fragments.PersonnelListFragment;
+import com.example.schedulecreator.fragments.SchedulerCreatorPersonnelListFragment;
 import com.example.schedulecreator.fragments.PersonnelManagementFragment;
 import com.example.schedulecreator.fragments.ScheduleCreatorFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         //Initialize fragment ViewPager
         mViewPager = findViewById( R.id.main_activity_view_pager );
         ArrayList<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add( PersonnelListFragment.newInstance( mViewModel.getScheduleGeneratorSettings().getPersonnelList() ) );
+        fragmentList.add( new SchedulerCreatorPersonnelListFragment());
         fragmentList.add( new ScheduleCreatorFragment() );
         fragmentList.add( new PersonnelManagementFragment());
         mPagerAdapter = new ScreenSlidePageAdapter(getSupportFragmentManager(), getLifecycle());

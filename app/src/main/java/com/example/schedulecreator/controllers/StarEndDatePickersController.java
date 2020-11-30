@@ -5,9 +5,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import com.example.schedulecreator.DateUtils.IDateFormaterUtil;
+import com.example.schedulecreator.Interfaces.SchedulerSettingsManager;
 import com.example.schedulecreator.dialogs.DatePickerDialogFragment;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,21 +18,22 @@ public class StarEndDatePickersController {
 
     private TextView mPickStartDateTv;
     private TextView mPickEndDateTv;
-    private MutableLiveData<Date> mStarDate;
-    private MutableLiveData<Date> mEndDate;
+    private LiveData<Date> mStarDate;
+    private LiveData<Date> mEndDate;
     private IDateFormaterUtil mDateFormatterUtil;
+    private SchedulerSettingsManager mSchedulerSettingsMng;
 
     public StarEndDatePickersController(TextView pickStartDateTv,
                                         TextView pickEndDateTv,
                                         IDateFormaterUtil dateFormaterUtil,
-                                        @NonNull MutableLiveData<Date> startDate,
-                                        @NonNull MutableLiveData<Date> endDate,
+                                        SchedulerSettingsManager schedulerSettingsManager,
                                         FragmentActivity activity){
+        mSchedulerSettingsMng = schedulerSettingsManager;
         mPickStartDateTv = pickStartDateTv;
         mPickEndDateTv = pickEndDateTv;
         mDateFormatterUtil = dateFormaterUtil;
-        mStarDate = startDate;
-        mEndDate = endDate;
+        mStarDate = mSchedulerSettingsMng.getStartDate();
+        mEndDate = mSchedulerSettingsMng.getEndDate();
         initializeDatePickers( activity );
 
     }
@@ -95,7 +98,7 @@ public class StarEndDatePickersController {
 
     //Show the date picker for start date
     private void showDatePickerDialog( FragmentActivity activity, DatePickerDialogFragment.StartOrEndDate dateTag) {
-        DialogFragment datePickerDialogFragment = new DatePickerDialogFragment( mStarDate, mEndDate, dateTag );
+        DialogFragment datePickerDialogFragment = new DatePickerDialogFragment( mSchedulerSettingsMng, dateTag );
         datePickerDialogFragment.show( activity.getSupportFragmentManager(), null);
     }
 

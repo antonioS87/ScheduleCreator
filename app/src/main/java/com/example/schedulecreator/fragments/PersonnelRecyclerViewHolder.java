@@ -64,6 +64,7 @@ public class PersonnelRecyclerViewHolder extends RecyclerView.ViewHolder {
 
 //        mColorCodingView.setBackgroundColor( worker.getColor() );
 
+        if(mSelected.getValue() == null) mSelected.setValue(true);
         changeBackground( mSelected.getValue() ? mColorPositive : mColorNegative );
 
     }

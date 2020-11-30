@@ -9,28 +9,31 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.example.schedulecreator.Interfaces.PersonnelRepoManager;
+import com.example.schedulecreator.Interfaces.SchedulerSettingsManager;
 import com.example.schedulecreator.ViewModels.MainActivityViewModel;
 import com.example.schedulecreator.R;
 import com.example.schedulecreator.database.Worker;
 
 import java.util.ArrayList;
 
-public class PersonnelListFragment  extends Fragment {
+public class SchedulerCreatorPersonnelListFragment extends Fragment {
 
     private RecyclerView mPersonnelRecycleView;
-    private MainActivityViewModel mViewModel;
-    private MutableLiveData<ArrayList<Worker>> mPersonnelList;
+    private SchedulerSettingsManager mSchedulerSettingsMng;
+    private LiveData<ArrayList<Worker>> mPersonnelList;
     private StaggeredGridLayoutManager mLayoutManager;
     private PersonnelRecyclerAdapter mRecyclerAdapter;
 
-    public static PersonnelListFragment newInstance( MutableLiveData<ArrayList<Worker>> personnelList) {
-        PersonnelListFragment personnelListFragment = new PersonnelListFragment();
+    public static SchedulerCreatorPersonnelListFragment newInstance(MutableLiveData<ArrayList<Worker>> personnelList) {
+        SchedulerCreatorPersonnelListFragment personnelListFragment = new SchedulerCreatorPersonnelListFragment();
         personnelListFragment.setPersonnelList( personnelList );
         return personnelListFragment;
     }
@@ -40,8 +43,8 @@ public class PersonnelListFragment  extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate( R.layout.personnel_list_fragment_layout, container, false);
 
-        mViewModel = new ViewModelProvider( getActivity() ).get( MainActivityViewModel.class );
-        mPersonnelList = mViewModel.getScheduleGeneratorSettings().getPersonnelList();
+        mSchedulerSettingsMng = new ViewModelProvider( getActivity() ).get( MainActivityViewModel.class );
+        mPersonnelList = mSchedulerSettingsMng.getSchedulerSettPersonnelList();
 
 //        Log.d("test_tag_antonio", " PersonnelListFragment; onCreateView; mPersonnelList size: " + mPersonnelList.getValue().size());
         mPersonnelRecycleView = view.findViewById( R.id.personnel_recycler_view );
