@@ -1,4 +1,6 @@
 package com.example.schedulecreator.database;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.ColumnInfo;
@@ -22,6 +24,60 @@ public class Worker  implements Comparable<Worker>{
 
     @Ignore
     private MutableLiveData<Boolean> mSelected = new MutableLiveData<>();
+
+    //Following variables will be used in ranking of the workers
+    //Initially this info is not stored in database and is initialized to zero
+    //In the future the app will be fixed to store this data based on implemented calendar
+    @Ignore
+    private int nOrdinaryDays = 0;
+    @Ignore
+    private int nThursdays = 0;
+    @Ignore
+    private int nFridays = 0;
+    @Ignore
+    private int nSaturdays = 0;
+    @Ignore
+    private int nSundays = 0;
+
+    public int getnOrdinaryDays() {
+        return nOrdinaryDays;
+    }
+
+    public void setnOrdinaryDays(int nOrdinaryDays) {
+        this.nOrdinaryDays = nOrdinaryDays;
+    }
+
+    public int getnThursdays() {
+        return nThursdays;
+    }
+
+    public void setnThursdays(int nThursdays) {
+        this.nThursdays = nThursdays;
+    }
+
+    public int getnFridays() {
+        return nFridays;
+    }
+
+    public void setnFridays(int nFridays) {
+        this.nFridays = nFridays;
+    }
+
+    public int getnSaturdays() {
+        return nSaturdays;
+    }
+
+    public void setnSaturdays(int nSaturdays) {
+        this.nSaturdays = nSaturdays;
+    }
+
+    public int getnSundays() {
+        return nSundays;
+    }
+
+    public void setnSundays(int nSundays) {
+        this.nSundays = nSundays;
+    }
 
     public Worker( String mFirstName, String mLastName){
 //        Log.d("test_tag_antonio", " Worker constructor; first name: " + firstName + " last name: " + lastName + " id: " + id + " selected: " + selected);
@@ -73,5 +129,14 @@ public class Worker  implements Comparable<Worker>{
 
     public void setSelected( MutableLiveData<Boolean> selected){
         mSelected = selected;
+    }
+
+    public void printNumOfDays(){
+        Log.d("worker_days", "worker \n" + this.getFirstName() + " " + this.getLastName() + "\n"
+                                        + "ordinary:  " + getnOrdinaryDays() + "\n"
+                                        + "thursdays: " + getnThursdays() + "\n"
+                                        + "fridays:   " + getnFridays() + "\n"
+                                        + "saturdays: " + getnSaturdays() + "\n"
+                                        + "sundays:   " + getnSundays() +  "\n") ;
     }
 }

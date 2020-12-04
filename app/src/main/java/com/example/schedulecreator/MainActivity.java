@@ -3,6 +3,7 @@ package com.example.schedulecreator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -12,12 +13,17 @@ import android.view.MenuItem;
 
 import com.example.schedulecreator.ViewModels.MainActivityViewModel;
 import com.example.schedulecreator.adapters.ScreenSlidePageAdapter;
+import com.example.schedulecreator.database.Worker;
 import com.example.schedulecreator.fragments.SchedulerCreatorPersonnelListFragment;
 import com.example.schedulecreator.fragments.PersonnelManagementFragment;
 import com.example.schedulecreator.fragments.ScheduleCreatorFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Random;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,7 +57,47 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setCurrentItem(0);
 
 
+        mViewModel.getSchedulerSettPersonnelList().observe(this, new Observer<ArrayList<Worker>>() {
+            @Override
+            public void onChanged(ArrayList<Worker> workers) {
+                Random random = new Random();
 
+
+
+                for(Worker worker : workers){
+                    worker.setnOrdinaryDays(random.nextInt(7));
+                    worker.setnThursdays(random.nextInt(7));
+                    worker.setnFridays(random.nextInt(7));
+                    worker.setnSaturdays(random.nextInt(7));
+                    worker.setnSundays(random.nextInt(7));
+                }
+
+                workers.sort((worker, t1) -> worker.getnSundays()-t1.getnSundays());
+
+
+                ArrayList<Worker> bufferList = new ArrayList(workers.parallelStream().
+                        filter(worker -> worker.getnSundays() == workers.get(0)
+                                .getnSundays() )
+                        .collect(Collectors.toList()));
+
+//                ArrayList<Worker> bufferList = new ArrayList<>();
+//                for (Worker worker:workers){
+//                    if(worker.getnSundays() == workers.get(0).getnSundays() ){
+//                        bufferList.add( worker );
+//                    }else{
+//                        break;
+//                    }
+//
+//                }
+
+                for (Worker worker:bufferList){
+                    worker.printNumOfDays();
+                }
+
+
+
+            }
+        });
 
         //Connecting the bottom navigation and viewPager
         mBottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -99,4 +145,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }

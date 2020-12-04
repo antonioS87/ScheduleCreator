@@ -17,4 +17,6 @@
     <string name="edit_worker_dialog_title">EDIT WORKER</string>
     <string name="edit_worker_dialog_save_changes_button">Save Changes</string>
     <string name="worker_updated_warning_text">Worker updated.</string>
+    <string name="generate_schedule_dialog_title">Create schedule with the given options?</string>
+    <string name="generate_schedule_dialog_button_text">GENERATE</string>
 </resources>

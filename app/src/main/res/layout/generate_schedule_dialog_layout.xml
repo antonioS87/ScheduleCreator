@@ -1,0 +1,47 @@
+<!-- fragment_edit_name.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edit_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    >
+
+    <TextView
+        android:id="@+id/add_worker_dialog_title"
+        android:text="@string/generate_schedule_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="14dp"
+        android:layout_marginBottom="4dp"/>
+
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginBottom="32dp">
+
+        <Button
+            android:id="@+id/generate_schedule_dialog_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/generate_schedule_dialog_button_text"
+            android:layout_marginLeft="4dp"
+            />
+
+        <Button
+            android:id="@+id/cancel_schedule_generation_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_add_new_worker_button_text"
+            android:inputType="text"
+
+            />
+    </LinearLayout>
+
+</LinearLayout>
