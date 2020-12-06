@@ -1,30 +1,30 @@
 package com.example.schedulecreator.dialogs;
 
-import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.ButtonBarLayout;
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.schedulecreator.Interfaces.PersonnelManager;
-import com.example.schedulecreator.Interfaces.PersonnelRepoManager;
 import com.example.schedulecreator.Interfaces.SchedulerSettingsManager;
-import com.example.schedulecreator.Models.ScheduleGeneratorSettings;
 import com.example.schedulecreator.R;
-import com.example.schedulecreator.ViewModels.MainActivityViewModel;
-import com.example.schedulecreator.database.Worker;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.schedulecreator.ScheduleUtils.ScheduleCreatorUtil;
+import com.example.schedulecreator.holidayApi.Holiday;
+import com.example.schedulecreator.holidayApi.HolidayApiClient;
+import com.example.schedulecreator.holidayApi.HolidayApiInterface;
+import com.example.schedulecreator.holidayApi.HolidayResponse;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 // ...
 
 public class GenerateScheduleDialog extends DialogFragment {
@@ -65,7 +65,26 @@ public class GenerateScheduleDialog extends DialogFragment {
         mGenerateScheduleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "GENERATING SCHEDULE!", Toast.LENGTH_SHORT).show();
+                ScheduleCreatorUtil schUtil = new ScheduleCreatorUtil();
+                schUtil.generateSchedule(mScheduleSettings);
+                HolidayApiInterface holidayInterface = HolidayApiClient.getClient().create(HolidayApiInterface.class);
+                String apiKey = "82cde7fe8dab289874ce616896f8bcb6c4b9cda7";
+                Call<HolidayResponse> call = holidayInterface.getHolidays(apiKey, "hr", "2021");
+
+                call.enqueue(new Callback<HolidayResponse>() {
+                    @Override
+                    public void onResponse(Call<HolidayResponse> call, Response<HolidayResponse> response) {
+                        ArrayList<Holiday> holidays = new ArrayList<>(response.body().getResponse().getHolidays());
+                        for (Holiday holiday : holidays){
+                            Log.d("holidays","holiday: " + holiday.getName() + " date: " + holiday.getDate().toString());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<HolidayResponse> call, Throwable t) {
+
+                    }
+                });
             }
         });
 

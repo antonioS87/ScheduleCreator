@@ -8,7 +8,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Worker.class}, version = 1)
+import com.example.schedulecreator.holidayApi.Holiday;
+
+@Database(entities = {Worker.class, HolidayDb.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase mInstance;
     private static final String dbName = "scDb";
@@ -30,6 +32,7 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     public abstract WorkerDbDao workerDao();
+    public abstract HolidayDbDao holidayDbDao();
     public static AppDatabase getInstance(){
         return mInstance;
     }
