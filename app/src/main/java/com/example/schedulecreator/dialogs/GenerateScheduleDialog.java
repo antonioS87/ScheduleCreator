@@ -67,24 +67,7 @@ public class GenerateScheduleDialog extends DialogFragment {
             public void onClick(View view) {
                 ScheduleCreatorUtil schUtil = new ScheduleCreatorUtil();
                 schUtil.generateSchedule(mScheduleSettings);
-                HolidayApiInterface holidayInterface = HolidayApiClient.getClient().create(HolidayApiInterface.class);
-                String apiKey = "82cde7fe8dab289874ce616896f8bcb6c4b9cda7";
-                Call<HolidayResponse> call = holidayInterface.getHolidays(apiKey, "hr", "2021");
 
-                call.enqueue(new Callback<HolidayResponse>() {
-                    @Override
-                    public void onResponse(Call<HolidayResponse> call, Response<HolidayResponse> response) {
-                        ArrayList<Holiday> holidays = new ArrayList<>(response.body().getResponse().getHolidays());
-                        for (Holiday holiday : holidays){
-                            Log.d("holidays","holiday: " + holiday.getName() + " date: " + holiday.getDate().toString());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<HolidayResponse> call, Throwable t) {
-
-                    }
-                });
             }
         });
 
