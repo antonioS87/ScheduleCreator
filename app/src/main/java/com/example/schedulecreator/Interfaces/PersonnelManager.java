@@ -2,7 +2,7 @@ package com.example.schedulecreator.Interfaces;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.schedulecreator.database.Worker;
+import com.example.schedulecreator.Database.Worker;
 
 import java.util.ArrayList;
 

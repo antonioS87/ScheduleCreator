@@ -1,10 +1,12 @@
 package com.example.schedulecreator.Models;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.schedulecreator.Interfaces.SchedulerSettingsManager;
-import com.example.schedulecreator.database.Worker;
+import com.example.schedulecreator.Database.Worker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,15 +44,19 @@ public class ScheduleGeneratorSettings implements SchedulerSettingsManager {
 
     @Override
     public void setStartDate(Date startDate) {
+        Log.d("antonio_test", " ScheduleGeneratorSettings; setting start date: " + startDate.toString());
         mStartDate.setValue(startDate);
     }
 
     @Override
     public void setEndDate(Date endDate) {
+        Log.d("antonio_test", " ScheduleGeneratorSettings; setting end date: " + endDate.toString());
         mEndDate.setValue(endDate);
     }
 
     public void setPersonnelList(ArrayList<Worker> personnelList) {
         mPersonnelList.setValue(personnelList);
     }
+
+
 }

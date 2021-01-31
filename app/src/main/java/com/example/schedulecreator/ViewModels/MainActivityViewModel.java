@@ -1,37 +1,36 @@
 package com.example.schedulecreator.ViewModels;
+import android.app.Application;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
-import com.example.schedulecreator.Interfaces.PersonnelManager;
 import com.example.schedulecreator.Interfaces.PersonnelRepoManager;
-import com.example.schedulecreator.Interfaces.PersonnelRepositoryListener;
 import com.example.schedulecreator.Interfaces.SchedulerSettingsManager;
 import com.example.schedulecreator.Models.ScheduleGeneratorSettings;
-import com.example.schedulecreator.database.Worker;
-import com.example.schedulecreator.repositories.PersonnelRepository;
+import com.example.schedulecreator.Database.HolidayDb;
+import com.example.schedulecreator.Database.Worker;
+import com.example.schedulecreator.Repositories.HolidayRepoManager;
+import com.example.schedulecreator.Repositories.HolidayRepository;
+import com.example.schedulecreator.Repositories.PersonnelRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 
 
-public class MainActivityViewModel extends ViewModel implements PersonnelRepoManager, SchedulerSettingsManager {
+public class MainActivityViewModel extends ViewModel implements PersonnelRepoManager, SchedulerSettingsManager, HolidayRepoManager {
 
     private String DEBUG_TAG = getClass().getCanonicalName();
 
-    private static ScheduleGeneratorSettings mScheduleGeneratorSettings;
+    private static ScheduleGeneratorSettings mScheduleGeneratorSettings = new ScheduleGeneratorSettings();
     private PersonnelRepoManager mPersonnelRepoManager = PersonnelRepository.getInstance();
+    private HolidayRepoManager mHolidayRepo = HolidayRepository.getInstance();
 
 
     public MainActivityViewModel(){
         super();
         //Initializing schedule creator settings
-        mScheduleGeneratorSettings = new ScheduleGeneratorSettings();
         mPersonnelRepoManager.getObservableWorkersList().observeForever( new Observer<ArrayList<Worker>>() {
             @Override
             public void onChanged(ArrayList<Worker> workers) {
@@ -93,4 +92,12 @@ public class MainActivityViewModel extends ViewModel implements PersonnelRepoMan
     public void setEndDate(Date endDate) {
         mScheduleGeneratorSettings.setEndDate(endDate);
     }
+
+    @Override
+    public LiveData<ArrayList<HolidayDb>> getHolidays() {
+
+        return mHolidayRepo.getHolidays();
+    }
+
+
 }

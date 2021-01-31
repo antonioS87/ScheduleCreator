@@ -2,11 +2,9 @@ package com.example.schedulecreator.Interfaces;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.schedulecreator.database.Worker;
+import com.example.schedulecreator.Database.Worker;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
 
 public interface PersonnelRepoManager extends PersonnelCRUDInterface  {
     LiveData<ArrayList<Worker>> getObservableWorkersList();

@@ -1,5 +1,6 @@
 package com.example.schedulecreator.Utils;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -19,7 +20,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class DataStore {
 
     public static String SCHEMA_NAME = "data_store";
-    private MutableLiveData<Date> databaseAge;
+    private Date databaseAge = null;
     private SharedPreferences sharedPreferences;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -27,8 +28,8 @@ public class DataStore {
 
 
 
-    public static DataStore getInstance(SharedPreferences sharedPreferences){
-        Loader.getInstance().sharedPreferences = sharedPreferences;
+    public static DataStore getInstance(Context context){
+        Loader.getInstance().sharedPreferences = context.getSharedPreferences(SCHEMA_NAME, Context.MODE_PRIVATE);
         Loader.getInstance().iniData();
         return Loader.getInstance();
     }
@@ -40,37 +41,52 @@ public class DataStore {
         }
     }
 
-    public LiveData<Date> getDatabaseAge() {
+    public Date getDatabaseAge() {
+        try {
+            databaseAge = simpleDateFormat.parse(sharedPreferences.getString(Key.DATABASE_AGE.toString(), ""));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return databaseAge;
     }
 
     public void setDatabaseAge(Date rdatabaseAge) {
-        Observable.fromRunnable(new Runnable() {
-            @Override
-            public void run() {
-                String newDbAge = simpleDateFormat.format(rdatabaseAge);
-                sharedPreferences.edit().putString(Key.DATABASE_AGE.toString(), newDbAge);
-                databaseAge.setValue(rdatabaseAge);
-            }
-        }).subscribeOn(Schedulers.io()).subscribe();
+
+        String newDbAge = simpleDateFormat.format(rdatabaseAge);
+        sharedPreferences.edit().putString(Key.DATABASE_AGE.toString(), newDbAge);
+        databaseAge = rdatabaseAge;
+//        Observable.fromRunnable(new Runnable() {
+//            @Override
+//            public void run() {
+//                String newDbAge = simpleDateFormat.format(rdatabaseAge);
+//                sharedPreferences.edit().putString(Key.DATABASE_AGE.toString(), newDbAge);
+//                databaseAge.postValue(rdatabaseAge);
+//            }
+//        }).subscribeOn(Schedulers.io()).subscribe();
 
     }
 
     private void iniData(){
-        Observable.fromRunnable(new Runnable() {
-            @Override
-            public void run() {
-                Date dbAge = null;
-                try {
-                    dbAge = simpleDateFormat.parse(sharedPreferences.getString(Key.DATABASE_AGE.toString(), ""));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
 
-                databaseAge.setValue(dbAge);
-
-            }
-        }).subscribeOn(Schedulers.io()).subscribe();
+        try {
+            databaseAge = simpleDateFormat.parse(sharedPreferences.getString(Key.DATABASE_AGE.toString(), ""));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+//        Observable.fromRunnable(new Runnable() {
+//            @Override
+//            public void run() {
+//                Date dbAge = null;
+//                try {
+//                    dbAge = simpleDateFormat.parse(sharedPreferences.getString(Key.DATABASE_AGE.toString(), ""));
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                databaseAge.setValue(dbAge);
+//
+//            }
+//        }).subscribeOn(Schedulers.io()).subscribe();
     }
 
     public enum Key{

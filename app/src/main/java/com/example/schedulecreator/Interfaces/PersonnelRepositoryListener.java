@@ -1,8 +1,7 @@
 package com.example.schedulecreator.Interfaces;
 
-import com.example.schedulecreator.database.Worker;
+import com.example.schedulecreator.Database.Worker;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface PersonnelRepositoryListener {

@@ -1,10 +1,6 @@
 package com.example.schedulecreator.Interfaces;
 
-import androidx.lifecycle.LiveData;
-
-import com.example.schedulecreator.database.Worker;
-
-import java.util.ArrayList;
+import com.example.schedulecreator.Database.Worker;
 
 public interface PersonnelCRUDInterface {
     void addWorker(Worker worker);
